@@ -4,72 +4,150 @@
 {% block content %}
                                                 
 	<!-- Hero section -->
-	<section class="hero-section">
-		<div class="hero-slider owl-carousel">
-			<!-- item -->
-			<div class="hs-item set-bg text-white" data-setbg="{% static 'mainapp/img/slide-1.jpg' %}">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-7">
-							<h2>Love your smile</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
-							<a href="#" class="site-btn">Read More</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- item -->
-			<div class="hs-item set-bg text-white" data-setbg="{% static 'mainapp/img/slide-1.jpg' %}">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-7">
-							<h2>Best Dentist.</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
-							<a href="#" class="site-btn">Read More</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</section>
+<!--	<section class="hero-section">-->
+<!--		<div class="hero-slider owl-carousel">-->
+<!--			&lt;!&ndash; item &ndash;&gt;-->
+<!--			<div class="hs-item set-bg text-white" data-setbg="{% static 'mainapp/img/slide-1.jpg' %}">-->
+<!--				<div class="container">-->
+<!--					<div class="row">-->
+<!--						<div class="col-xl-7">-->
+<!--							<h2>Love your smile</h2>-->
+<!--							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>-->
+<!--							<a href="#" class="site-btn">Read More</a>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--			&lt;!&ndash; item &ndash;&gt;-->
+<!--			<div class="hs-item set-bg text-white" data-setbg="{% static 'mainapp/img/slide-1.jpg' %}">-->
+<!--				<div class="container">-->
+<!--					<div class="row">-->
+<!--						<div class="col-xl-7">-->
+<!--							<h2>Best Dentist.</h2>-->
+<!--							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>-->
+<!--							<a href="#" class="site-btn">Read More</a>-->
+<!--						</div>-->
+<!--					</div>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</section>-->
 	<!-- Hero section end -->
 
 
 	<!-- Banner section -->
-	<section class="banner-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-7 banner-text text-white">
-					<h4>Schedule your appointment for a free consultation.</h4>
-					<p>*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus.</p>
-				</div>
-				<div class="col-lg-5 text-lg-right">
-					<a href="#" class="site-btn sb-light">Read More</a>
-				</div>
-			</div>
-		</div>
-	</section>
+<!--	<section class="banner-section">-->
+<!--		<div class="container">-->
+<!--			<div class="row">-->
+<!--				<div class="col-lg-7 banner-text text-white">-->
+<!--					<h4>Schedule your appointment for a free consultation.</h4>-->
+<!--					<p>*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus.</p>-->
+<!--				</div>-->
+<!--				<div class="col-lg-5 text-lg-right">-->
+<!--					<a href="#" class="site-btn sb-light">Read More</a>-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</section>-->
 	<!-- Banner section end -->
 
 
 
 	<!-- About section -->
-	<section class="about-section spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-5">
-					<img src="{% static 'mainapp/img/about.jpg' %}" alt="">
-				</div>
-				<div class="col-lg-7 about-text">
-					<h2>We Care About Your teeth</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper venenatis turpis eget suscipit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec eu nulla sollicitudin, vestibulum sapien nec, dictum dolor. Morbi non penatibus et magnis  volutpat magna. </p>
-					<img src="{% static 'mainapp/img/awards.jpg' %}" alt="">
-				</div>
-			</div>
-		</div>
-	</section>
+<!--	<section class="about-section spad">-->
+<!--		<div class="container">-->
+<!--			<div class="row">-->
+<!--				<div class="col-lg-5">-->
+<!--					<img src="{% static 'mainapp/img/about.jpg' %}" alt="">-->
+<!--				</div>-->
+<!--				<div class="col-lg-7 about-text">-->
+<!--					<h2>We Care About Your teeth</h2>-->
+<!--					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper venenatis turpis eget-->
+<!--						suscipit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.-->
+<!--						Donec eu nulla sollicitudin, vestibulum sapien nec, dictum dolor. Morbi non penatibus et magnis-->
+<!--						volutpat magna.-->
+<!--					</p>-->
+<!--					<img src="{% static 'mainapp/img/awards.jpg' %}" alt="">-->
+<!--				</div>-->
+<!--			</div>-->
+<!--		</div>-->
+<!--	</section>-->
 	<!-- About section end -->
+<!--Основной контент-->
+	<section class="">
+		{% for m in rating %}
+        <div class="content">
+            <div class="con_left">
+                <img src="{% static 'mainapp/img/clinica_800.jpg' %}" width="300">
+            </div>
+            <div class="con_mid">
+                <h3>Название клиники</h3>
+                <img src="{% static 'mainapp/img/rating.png' %}"><span>Отзывов:</span>
+                <p>Рейтинг:</p>
+                <p class="" align="justify">Стоматология в Москве в клиниках НИАРМЕДИК – это достаточно развитое направление. Услуги стоматологии на стоматологическом оборудовании высокого класса оказывают опытные врачи первой и высшей квалификационной категории. В данном разделе представлены недорогие стоматологии НИАРМЕДИК, в которых можно получить полный комплекс качественных стоматологических услуг. Записывайтесь в наши клиники для решения любых проблем с зубами.</p>
+            </div>
+            <div class="con_right">
+                <p>Цены:</p>
+                <p><a href="#">Подробнее</a></p>
+                <p>
+                    Телефон: +7 (495) 495-00-00
+                    Адрес: Озёрная ул., 10, Москва (этаж 1)
+                    Метро: Волоколамская, Мякинино, Строгино, Юго-западная, Озёрная, Мичуринский проспект, Аминьевская, Мичуринский проспект
+                    Часы работы: ежедневно, 08:00–21:00
+                    Услуги: Выравнивание зубов, удаление зубного камня, виниры, имплантация зубов, протезирование зубов, реставрация зубов, удаление зубного камня, удаление зубов, установка компониров, чистка зубов
+                </p>
+            </div>
+        </div>
+		{% endfor %}
+        <!--Конец основного контента-->
+        <div class="separator">&nbsp;</div>
+	</section>
+	<!--РЕЙТИНГ-->
+	<!--Таблица рейтингов-->
+	<section class="">
+        <div class="rating">
+            <table class="tab_rating">
+                <thead align="center">
+                    <tr class="table_head">
+                        <td class="sort" title="Нажмите на заголовок, чтобы отсортировать колонку">Название</td>
+                        <td class="sort" title="Нажмите на заголовок, чтобы отсортировать колонку">Рейтинг</td>
+                        <td class="sort" title="Нажмите на заголовок, чтобы отсортировать колонку">Рекомендуют</td>
+                        <td class="sort" title="Нажмите на заголовок, чтобы отсортировать колонку">Не рекомендуют</td>
+                        <td class="curcol" title="Нажмите на заголовок, чтобы отсортировать колонку"><span>↑&nbsp;</span>Баллы</td>
+                    </tr>
+                </thead>
+						{% for m in rating %}
+                <tbody align="center">
+                    <tr class="tr_rating">
+                        <td>
+							<div class="img_rating">
+								<a href="#">
+									<img src="{% static 'mainapp/img/clinica_150.jpg' %}" height=50px alt="" align="left">
+								</a>
+								<span>Ниармедик</span>
+							</div>
+                        </td>
+                        <td>
+                            <div class="stars tablet_hide">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <b style="display: none" class="tablet_show">5/5</b>
+                        </td>
+                        <td><b style="color: #00aa08">38</b></td>
+                        <td><b style="color: #aa0000">2</b></td>
+                        <td><b style="color: #00aa08">40</b></td>
+                    </tr>
+                </tbody>
+						{% endfor %}
+            </table>
+        </div>
 
+	</section>
+	<!--конец таблицы рейтингов-->
 
 	<!-- Facts section -->
 	<section class="facts-section set-bg" data-setbg="{% static 'mainapp/img/facts-bg.jpg' %}">
