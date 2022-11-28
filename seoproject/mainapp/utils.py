@@ -1,4 +1,4 @@
-from mainapp.models import *
+from .models import *
 
 """
 Главное меню
@@ -16,7 +16,7 @@ class DataMixin:
 
     def get_user_context(self, **kwargs):
         context = kwargs
-        prods = Product.objects.all()
+        prods = Company.objects.all()
 
         user_menu = menu.copy()  # делаем копию меню.
         # if not self.request.user.is_authenticated:  # если user не авторизован, убираем пункт меню "Добавить статью"
