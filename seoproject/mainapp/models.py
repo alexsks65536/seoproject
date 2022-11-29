@@ -1,6 +1,5 @@
 from django.db import models
 from django.urls import reverse
-from django.core.validators import RegexValidator
 
 
 class Company(models.Model):
@@ -13,33 +12,9 @@ class Company(models.Model):
     description = models.TextField(
         verbose_name="описание",
         blank=True)
-    phoneNumberRegex = RegexValidator(
-        regex=r"^\+?1?\d{8,15}$"
-    )
-    telephone = models.CharField(
-        validators=[phoneNumberRegex],
-        max_length=16,
-        unique=True
-    )
-    address = models.TextField(
-        blank=True,
-        verbose_name="Адрес коммпании"
-    )
-    nearest_metro_stations = models.TextField(
-        blank=True,
-        verbose_name="Ближайшие метро"
-    )
-    opening_hours = models.TextField(
-        blank=True,
-        verbose_name="Режим работы"
-    )
     services = models.TextField(
         blank=True,
         verbose_name="Оказываемые услуги"
-    )
-    reviews = models.IntegerField(
-        verbose_name="Кол-во отзывов",
-        blank=True
     )
     rating = models.IntegerField(
         verbose_name="Цифра рейтинга",
@@ -63,14 +38,11 @@ class Company(models.Model):
         auto_now_add=True,
         verbose_name="Время создания"
     )
-    time_update = models.DateField(
-        auto_now=True,
-        verbose_name="Время изменения"
-    )
 
     class Meta:
-        verbose_name = "Клиника"
-        verbose_name_plural = "Клиники"
+        verbose_name = 'Компания'
+        verbose_name_plural = 'Компании'
+        ordering = ['id', 'name']
 
     def __str__(self):
         return self.name
@@ -102,8 +74,9 @@ class Reviews(models.Model):
     )
 
     class Meta:
-        verbose_name = "Отзыв"
-        verbose_name_plural = "Отзывы"
+        verbose_name = 'Отзыв'
+        verbose_name_plural = 'Отзывы'
+        ordering = ['id']
 
     def __str__(self):
         return self.name
