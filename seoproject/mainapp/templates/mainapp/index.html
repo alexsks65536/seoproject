@@ -2,29 +2,36 @@
 {% load static %}
 
 {% block content %}
-                                                
+
 	<section class="">
-		{% for m in rating %}
+		{% for clinic in company %}
         <div class="content">
             <div class="con_left">
-                <img src="{% static 'mainapp/img/clinica_800.jpg' %}" width="300">
+				{% if clinic.photo %}
+					<img src="{{clinic.photo.url}}" width="300">
+				{% endif %}
+<!--                <img src="{% static 'mainapp/img/clinica_800.jpg' %}" width="300">-->
             </div>
             <div class="con_mid">
-                <h3>Название клиники</h3>
-                <img src="{% static 'mainapp/img/rating.png' %}"><span>Отзывов:</span>
-                <p>Рейтинг:</p>
-                <p class="" align="justify">Стоматология в Москве в клиниках НИАРМЕДИК – это достаточно развитое направление. Услуги стоматологии на стоматологическом оборудовании высокого класса оказывают опытные врачи первой и высшей квалификационной категории. В данном разделе представлены недорогие стоматологии НИАРМЕДИК, в которых можно получить полный комплекс качественных стоматологических услуг. Записывайтесь в наши клиники для решения любых проблем с зубами.</p>
+                <h3>{{ clinic.name }}</h3>
+<!--				Отображение в цикле звездочек рейтинга-->
+{% comment %}
+				{% for star in clinic.stars %}
+					{% if star %}
+						<i class="fa fa-star"></i>
+					{% endif %}
+				{% endfor %}
+{% endcomment %}
+
+<!--				&nbsp;&nbsp;<span>Отзывов:&nbsp; {{ clinic.rating }}</span>-->
+                	<img src="{% static 'mainapp/img/rating.png' %}">&nbsp;&nbsp;<span>Отзывов:&nbsp; {{ clinic.rating }}</span>
+                <p>Рейтинг: {{ clinic.stars }}</p>
+                <p class="" align="justify">{{ clinic.description }}</p>
             </div>
             <div class="con_right">
                 <p>Цены:</p>
                 <p><a href="#">Подробнее</a></p>
-                <p>
-                    Телефон: +7 (495) 495-00-00
-                    Адрес: Озёрная ул., 10, Москва (этаж 1)
-                    Метро: Волоколамская, Мякинино, Строгино, Юго-западная, Озёрная, Мичуринский проспект, Аминьевская, Мичуринский проспект
-                    Часы работы: ежедневно, 08:00–21:00
-                    Услуги: Выравнивание зубов, удаление зубного камня, виниры, имплантация зубов, протезирование зубов, реставрация зубов, удаление зубного камня, удаление зубов, установка компониров, чистка зубов
-                </p>
+                <p>{{ clinic.services }}</p>
             </div>
         </div>
 		{% endfor %}
