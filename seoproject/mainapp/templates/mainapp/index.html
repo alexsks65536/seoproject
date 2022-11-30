@@ -7,12 +7,15 @@
 		{% for clinic in company %}
         <div class="content">
             <div class="con_left">
-				{% if clinic.photo %}
+
 					<img src="{{clinic.photo.url}}" width="300">
-				{% endif %}
+
 <!--                <img src="{% static 'mainapp/img/clinica_800.jpg' %}" width="300">-->
             </div>
             <div class="con_mid">
+				              {% for tag in clinic.tag.all %}
+                  <a href="" class="mr-1 badge badge-info">#{{ tag }}</a>
+              {% endfor %}
                 <h3>{{ clinic.name }}</h3>
 <!--				Отображение в цикле звездочек рейтинга-->
 {% comment %}

@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from taggit.managers import TaggableManager
 
 
 class Company(models.Model):
@@ -25,7 +26,7 @@ class Company(models.Model):
         blank=True
     )
     photo = models.ImageField(
-        upload_to="photos/%Y/%m/%d/",
+        upload_to="clinics/images/",
         verbose_name="Фото"
     )
     slug = models.SlugField(
@@ -38,6 +39,7 @@ class Company(models.Model):
         auto_now_add=True,
         verbose_name="Время создания"
     )
+    tag = TaggableManager()
 
     class Meta:
         verbose_name = 'Компания'
