@@ -706,6 +706,9 @@ ol {
     padding-right: 30px;
 }
 .tab_rating {
+    border-bottom-width: 1px; /* Толщина линии внизу */
+    border-bottom-style: solid; /* Стиль линии внизу */
+    border-bottom-color: #888; /* Цвет линии внизу */
     width: 80%;
     margin: 5px;
     border-collapse: collapse;
@@ -720,17 +723,26 @@ ol {
 }
 .img_rating {
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: center;
-
+    padding: 10px 10px 5px 10px;
+}
+.img_rating img{
+    border-radius: 25px;  /* закругление углов картинок*/
+    border: 1px #ccc solid;
+    box-shadow: 0 0 3px #444;
 }
 .sort {
     align:center;
     padding: 10px;
 }
 .tr_rating {
+    border-bottom-width: 1px; /* Толщина линии внизу */
+    border-bottom-style: solid; /* Стиль линии внизу */
+    border-bottom-color: #888; /* Цвет линии внизу */
     align:center;
     margin: 10px;
+    padding: 10px;
 }
 /*---------------------
   Services Section

@@ -55,15 +55,17 @@
                         <td class="curcol" title="{{ message }}"><span>↑&nbsp;</span>Баллы</td>
                     </tr>
                 </thead>
-						{% for m in rating %}
+
+				{% for clinic in company %}
                 <tbody align="center">
                     <tr class="tr_rating">
                         <td>
 							<div class="img_rating">
 								<a href="#">
-									<img src="{% static 'mainapp/img/clinica_150.jpg' %}" height=50px alt="" align="left">
+									<img src="{{clinic.photo.url}}" height=50px alt="" align="left">
 								</a>
-								<span>Ниармедик</span>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<span>{{ clinic.name }}</span>
 							</div>
                         </td>
                         <td>
@@ -76,9 +78,9 @@
                             </div>
                             <b style="display: none" class="tablet_show">5/5</b>
                         </td>
-                        <td><b style="color: #00aa08">38</b></td>
-                        <td><b style="color: #aa0000">2</b></td>
-                        <td><b style="color: #00aa08">40</b></td>
+                        <td><b style="color: #00aa08">{{ clinic.rating }}</b></td>
+                        <td><b style="color: #aa0000">{{ clinic.stars }}</b></td>
+                        <td><b style="color: #00aa08">{{ clinic.rating }}</b></td>
                     </tr>
                 </tbody>
 						{% endfor %}
@@ -212,7 +214,7 @@
 	<section class="testimonials-section spad">
 		<div class="container">
 			<div class="section-title text-center">
-				<h2>Testimonials</h2>
+				<h2>Отзывы клиентов:</h2>
 			</div>
 		</div>
 		<div class="testimonials-warp">
