@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.views.generic import ListView
 
 from .models import Company, Reviews
@@ -21,6 +20,9 @@ class Index(ListView):
         context = super().get_context_data(**kwargs)
         context['menu'] = menu
         context['message'] = message
+        star = Company.stars
+        context['stars'] = [i for i in range(1, 6)]
+
         return context
 
 

@@ -15,16 +15,14 @@
               {% endfor %}
                 <h3>{{ clinic.name }}</h3>
 <!--				Отображение в цикле звездочек рейтинга-->
-{% comment %}
-				{% for star in clinic.stars %}
-					{% if star %}
+				{% for s in stars %}
+					{% if s %}
 						<i class="fa fa-star"></i>
 					{% endif %}
 				{% endfor %}
-{% endcomment %}
 
-<!--				&nbsp;&nbsp;<span>Отзывов:&nbsp; {{ clinic.rating }}</span>-->
-                	<img src="{% static 'mainapp/img/rating.png' %}">&nbsp;&nbsp;<span>Отзывов:&nbsp; {{ clinic.rating }}</span>
+				&nbsp;&nbsp;<span>Отзывов:&nbsp; {{ clinic.rating }}{{  sss  }}</span>
+
                 <p>Рейтинг: {{ clinic.stars }}</p>
                 <p class="" align="justify">{{ clinic.description }}</p>
             </div>
@@ -85,11 +83,12 @@
                         </td>
                         <td>
                             <div class="stars tablet_hide">
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
+								<!--Отображение в цикле звездочек рейтинга-->
+								{% for s in stars %}
+									{% if s %}
+										<i class="fa fa-star"></i>
+									{% endif %}
+								{% endfor %}
                             </div>
                             <b style="display: none" class="tablet_show">5/5</b>
                         </td>
