@@ -2,74 +2,93 @@
 {% load static %}
 
 {% block content %}
-                                                
-	<!-- Hero section -->
-	<section class="hero-section">
-		<div class="hero-slider owl-carousel">
-			<!-- item -->
-			<div class="hs-item set-bg text-white" data-setbg="{% static 'mainapp/img/slide-1.jpg' %}">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-7">
-							<h2>Love your smile</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
-							<a href="#" class="site-btn">Read More</a>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- item -->
-			<div class="hs-item set-bg text-white" data-setbg="{% static 'mainapp/img/slide-1.jpg' %}">
-				<div class="container">
-					<div class="row">
-						<div class="col-xl-7">
-							<h2>Best Dentist.</h2>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus mauris sceleri sque, at rutrum nulla dictum. Ut ac ligula sapien. Suspendisse cursus faucibus finibus.</p>
-							<a href="#" class="site-btn">Read More</a>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+
+	<section class="">
+		{% for clinic in company %}
+        <div class="content">
+            <div class="con_left">
+
+					<img src="{{clinic.photo.url}}" width="300">
+
+<!--                <img src="{% static 'mainapp/img/clinica_800.jpg' %}" width="300">-->
+            </div>
+            <div class="con_mid">
+				              {% for tag in clinic.tag.all %}
+                  <a href="" class="mr-1 badge badge-info">#{{ tag }}</a>
+              {% endfor %}
+                <h3>{{ clinic.name }}</h3>
+<!--				Отображение в цикле звездочек рейтинга-->
+{% comment %}
+				{% for star in clinic.stars %}
+					{% if star %}
+						<i class="fa fa-star"></i>
+					{% endif %}
+				{% endfor %}
+{% endcomment %}
+
+<!--				&nbsp;&nbsp;<span>Отзывов:&nbsp; {{ clinic.rating }}</span>-->
+                	<img src="{% static 'mainapp/img/rating.png' %}">&nbsp;&nbsp;<span>Отзывов:&nbsp; {{ clinic.rating }}</span>
+                <p>Рейтинг: {{ clinic.stars }}</p>
+                <p class="" align="justify">{{ clinic.description }}</p>
+            </div>
+            <div class="con_right">
+                <p>Цены:</p>
+                <p><a href="#">Подробнее</a></p>
+                <p>{{ clinic.services }}</p>
+            </div>
+        </div>
+		{% endfor %}
+        <!--Конец основного контента-->
+        <div class="separator">&nbsp;</div>
 	</section>
-	<!-- Hero section end -->
+	<!--РЕЙТИНГ-->
+	<!--Таблица рейтингов-->
+	<section class="">
+        <div class="rating">
+            <table class="tab_rating">
+                <thead align="center">
+                    <tr class="table_head">
+                        <td class="sort" title="{{ message }}">Название</td>
+                        <td class="sort" title="{{ message }}">Рейтинг</td>
+                        <td class="sort" title="{{ message }}">Рекомендуют</td>
+                        <td class="sort" title="{{ message }}">Не рекомендуют</td>
+                        <td class="curcol" title="{{ message }}"><span>↑&nbsp;</span>Баллы</td>
+                    </tr>
+                </thead>
 
+				{% for clinic in company %}
+                <tbody align="center">
+                    <tr class="tr_rating">
+                        <td>
+							<div class="img_rating">
+								<a href="#">
+									<img src="{{clinic.photo.url}}" height=50px alt="" align="left">
+								</a>
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+								<span>{{ clinic.name }}</span>
+							</div>
+                        </td>
+                        <td>
+                            <div class="stars tablet_hide">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                            </div>
+                            <b style="display: none" class="tablet_show">5/5</b>
+                        </td>
+                        <td><b style="color: #00aa08">{{ clinic.rating }}</b></td>
+                        <td><b style="color: #aa0000">{{ clinic.stars }}</b></td>
+                        <td><b style="color: #00aa08">{{ clinic.rating }}</b></td>
+                    </tr>
+                </tbody>
+						{% endfor %}
+            </table>
+        </div>
 
-	<!-- Banner section -->
-	<section class="banner-section">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-7 banner-text text-white">
-					<h4>Schedule your appointment for a free consultation.</h4>
-					<p>*Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec malesuada lorem maximus.</p>
-				</div>
-				<div class="col-lg-5 text-lg-right">
-					<a href="#" class="site-btn sb-light">Read More</a>
-				</div>
-			</div>
-		</div>
 	</section>
-	<!-- Banner section end -->
-
-
-
-	<!-- About section -->
-	<section class="about-section spad">
-		<div class="container">
-			<div class="row">
-				<div class="col-lg-5">
-					<img src="{% static 'mainapp/img/about.jpg' %}" alt="">
-				</div>
-				<div class="col-lg-7 about-text">
-					<h2>We Care About Your teeth</h2>
-					<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis semper venenatis turpis eget suscipit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec eu nulla sollicitudin, vestibulum sapien nec, dictum dolor. Morbi non penatibus et magnis  volutpat magna. </p>
-					<img src="{% static 'mainapp/img/awards.jpg' %}" alt="">
-				</div>
-			</div>
-		</div>
-	</section>
-	<!-- About section end -->
-
+	<!--конец таблицы рейтингов-->
 
 	<!-- Facts section -->
 	<section class="facts-section set-bg" data-setbg="{% static 'mainapp/img/facts-bg.jpg' %}">
@@ -195,7 +214,7 @@
 	<section class="testimonials-section spad">
 		<div class="container">
 			<div class="section-title text-center">
-				<h2>Testimonials</h2>
+				<h2>Отзывы клиентов:</h2>
 			</div>
 		</div>
 		<div class="testimonials-warp">

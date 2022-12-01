@@ -664,6 +664,86 @@ ol {
   color: #fff;
 }
 
+/*======== CONTENT ==========*/
+.content {
+    display: flex; /*выставляем элементы горизонтально*/
+    justify-content: space-evenly;
+    align-items: center;
+    margin: 10px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.content p {
+    text-align: justify;
+    color:#444;
+    font-weight: 600;
+}
+.con_left {
+    width: auto;
+    margin: 10px;
+}
+.con_mid {
+    width: 500px;
+    margin: 10px;
+}
+.con_right {
+    width: 350px;
+    margin: 10px;
+}
+.separator {
+    margin: 0px;
+    padding: 7px;
+    background-color: #EEE;
+}
+/*========= RATING =============*/
+.rating {
+    display: flex; /*выставляем элементы горизонтально*/
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    margin: 10px;
+    padding-left: 0px;
+    padding-right: 30px;
+}
+.tab_rating {
+    border-bottom-width: 1px; /* Толщина линии внизу */
+    border-bottom-style: solid; /* Стиль линии внизу */
+    border-bottom-color: #888; /* Цвет линии внизу */
+    width: 80%;
+    margin: 5px;
+    border-collapse: collapse;
+    border: 1px solid grey;
+    align: center;
+}
+.table_head {
+    border: 1px solid grey;
+    align: center;
+    padding: 10px;
+    font-weight: bold;
+}
+.img_rating {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 10px 10px 5px 10px;
+}
+.img_rating img{
+    border-radius: 25px;  /* закругление углов картинок*/
+    border: 1px #ccc solid;
+    box-shadow: 0 0 3px #444;
+}
+.sort {
+    align:center;
+    padding: 10px;
+}
+.tr_rating {
+    border-bottom-width: 1px; /* Толщина линии внизу */
+    border-bottom-style: solid; /* Стиль линии внизу */
+    border-bottom-color: #888; /* Цвет линии внизу */
+    align:center;
+    margin: 10px;
+    padding: 10px;
+}
 /*---------------------
   Services Section
 -----------------------*/
