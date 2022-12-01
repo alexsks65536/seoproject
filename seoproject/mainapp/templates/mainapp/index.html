@@ -7,10 +7,7 @@
 		{% for clinic in company %}
         <div class="content">
             <div class="con_left">
-
 					<img src="{{clinic.photo.url}}" width="300">
-
-<!--                <img src="{% static 'mainapp/img/clinica_800.jpg' %}" width="300">-->
             </div>
             <div class="con_mid">
 				              {% for tag in clinic.tag.all %}
@@ -38,10 +35,28 @@
             </div>
         </div>
 		{% endfor %}
+
         <!--Конец основного контента-->
-        <div class="separator">&nbsp;</div>
+        <div class="separator">&nbsp;
+			<!--вывод списка страниц для пагинации-->
+			<div align="center">
+				<ul class="main-menu" style="float:inherit;">
+				{% for p in paginator.page_range %}
+				<li>
+					<a href="?page={{ p }}">{{ p }}</a>
+				</li>
+				{% endfor %}
+				</ul>
+			</div>
+		</div>
 	</section>
+
+{% endblock content%}
+
+{% block rating %}
+
 	<!--РЕЙТИНГ-->
+	<a name="ratings"></a>
 	<!--Таблица рейтингов-->
 	<section class="">
         <div class="rating">
@@ -89,6 +104,9 @@
 
 	</section>
 	<!--конец таблицы рейтингов-->
+{% endblock rating %}
+
+{% block reviews %}
 
 	<!-- Facts section -->
 	<section class="facts-section set-bg" data-setbg="{% static 'mainapp/img/facts-bg.jpg' %}">
@@ -102,17 +120,17 @@
 				<div class="col-md-3 col-sm-6 fact">
 					<i class="flaticon-002-toothbrush-1"></i>
 					<h2>14K</h2>
-					<p>Tooth Brushes</p>
+					<p>Отбеливание зубов</p>
 				</div>
 				<div class="col-md-3 col-sm-6 fact">
 					<i class="flaticon-030-tooth"></i>
 					<h2>678</h2>
-					<p>Extractions</p>
+					<p>Удаления</p>
 				</div>
 				<div class="col-md-3 col-sm-6 fact">
 					<i class="flaticon-023-tooth-1"></i>
 					<h2>2134</h2>
-					<p>Happy Pacients</p>
+					<p>Довольные клиенты</p>
 				</div>
 			</div>
 		</div>
@@ -120,12 +138,12 @@
 	<!-- Facts section end -->
 
 
-
-	<!-- Services section -->
+	<a name="services"></a>
+	<!-- Services section Наши услуги-->
 	<section class="services-section spad">
 		<div class="container">
 			<div class="section-title text-center">
-				<h2>Our Services</h2>
+				<h2>Услуги</h2>
 			</div>
 			<div class="row">
 				<div class="col-lg-4 col-md-6 service">
@@ -133,7 +151,7 @@
 						<i class="flaticon-020-decay"></i>
 					</div>
 					<div class="service-content">
-						<h4>Crowns Bridges</h4>
+						<h4>Коронки, мосты</h4>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sem per venenatis turpis.</p>
 					</div>
 				</div>
@@ -142,7 +160,7 @@
 						<i class="flaticon-011-implants"></i>
 					</div>
 					<div class="service-content">
-						<h4>Implants</h4>
+						<h4>Импланты</h4>
 						<p>Phasellus vehicula tempus orci vel consequat. Nullam lorem sem, viverra a rutrum sed.</p>
 					</div>
 				</div>
@@ -151,7 +169,7 @@
 						<i class="flaticon-024-toothbrush"></i>
 					</div>
 					<div class="service-content">
-						<h4>Teeth Whitening</h4>
+						<h4>Отбеливание зубов</h4>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sem per venenatis turpis,</p>
 					</div>
 				</div>
@@ -160,7 +178,7 @@
 						<i class="flaticon-019-dentist"></i>
 					</div>
 					<div class="service-content">
-						<h4>Root Canals</h4>
+						<h4>Чистка каналов</h4>
 						<p>Phasellus vehicula tempus orci vel consequat. Nullam lorem sem, viverra a rutrum sed.</p>
 					</div>
 				</div>
@@ -169,7 +187,7 @@
 						<i class="flaticon-001-tooth-4"></i>
 					</div>
 					<div class="service-content">
-						<h4>Wisdom Teeths</h4>
+						<h4>Зубы мудрости</h4>
 						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sem per venenatis turpis,</p>
 					</div>
 				</div>
@@ -178,7 +196,7 @@
 						<i class="flaticon-029-braces"></i>
 					</div>
 					<div class="service-content">
-						<h4>Braces</h4>
+						<h4>Брекеты</h4>
 						<p>Nullam lorem sem, viverra a rutru m sed, gravida mattis magna. Suspendisse vitae commodo.</p>
 					</div>
 				</div>
@@ -209,8 +227,8 @@
 	</div>
 	<!-- Gallery section end -->
 
-
-	<!-- Testimonials section -->
+	<a name="reviews"></a>
+	<!-- Отзывы 'Reviews' -->
 	<section class="testimonials-section spad">
 		<div class="container">
 			<div class="section-title text-center">
@@ -258,6 +276,6 @@
 			</div>
 		</div>
 	</section>
-	<!-- Testimonials section end -->
+	<!-- Отзывы 'Reviews' end -->
 
 {% endblock %}

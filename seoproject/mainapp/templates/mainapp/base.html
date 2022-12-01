@@ -28,6 +28,7 @@
 	  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 	<![endif]-->
 
+
 </head>
 <body>
 	<!-- Page Preloder -->
@@ -47,14 +48,15 @@
 				<i class="fa fa-bars"></i>
 			</div>
 			<!-- Main Menu -->
-			<ul class="main-menu">
-                {% for m in menu %}
-
-						<li><a href="{% url m.url_name %}">{{m.title}}</a></li>
-
-            	{% endfor %}
-
-			</ul>
+				<ul class="main-menu">
+					{% for m in menu %}
+	<!--						<li><a href="{% url m.url_name %}">{{m.title}}</a></li>-->
+					{% endfor %}
+					<li><a href="#">Главная</a></li>
+					<li><a href="#ratings">Рейтинги</a></li>
+					<li><a href="#services">Услуги</a></li>
+					<li><a href="#reviews">Отзывы</a></li>
+				</ul>
 		</div>
 		<div class="header-info">
 			<div class="container">
@@ -103,6 +105,13 @@
 
 	{% block content %}
     {% endblock content %}
+
+	{% block rating %}
+    {% endblock rating %}
+
+	{% block reviews %}
+    {% endblock reviews %}
+
 
 	<!-- Newsletter section -->
 	<section class="newsletter-section spad">

@@ -8,11 +8,11 @@ menu = [{'title': 'Главная', 'url_name': 'index'},
         {'title': 'Обратная связь', 'url_name': 'contact'},
         ]
 
-rating = [1, 2, 3, 4]  # временная переменная для показа шаблона, потом удалить
 message = 'Нажмите на заголовок, чтобы отсортировать колонку!'
 
 
 class Index(ListView):
+    paginate_by = 10
     model = Company
     template_name = 'mainapp/index.html'  # указываем путь к шаблону
     context_object_name = 'company'  # переменная контекста
@@ -21,7 +21,6 @@ class Index(ListView):
         context = super().get_context_data(**kwargs)
         context['menu'] = menu
         context['message'] = message
-        context['rating'] = rating  # для показа шаблона, потом удалить
         return context
 
 
@@ -33,7 +32,6 @@ class Review(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['menu'] = menu
-        context['rating'] = rating  # для показа шаблона, потом удалить
         return context
 
 
@@ -45,5 +43,4 @@ class Contact(ListView):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['menu'] = menu
-        context['rating'] = rating  # для показа шаблона, потом удалить
         return context
