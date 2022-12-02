@@ -38,13 +38,13 @@
         <div class="separator">&nbsp;
 			<!--вывод списка страниц для пагинации-->
 			<div align="center">
-				<ul class="main-menu" style="float:inherit;">
 				{% for p in paginator.page_range %}
-				<li>
-					<a href="?page={{ p }}">{{ p }}</a>
-				</li>
+					<ul class="main-menu" style="float:inherit;">
+						<li>
+							<a href="?page={{ p }}">{{ p }}</a>
+						</li>
+					</ul>
 				{% endfor %}
-				</ul>
 			</div>
 		</div>
 	</section>

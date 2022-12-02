@@ -41,6 +41,9 @@ class Company(models.Model):
     )
     tag = TaggableManager()
 
+    def get_absolute_url(self):
+        return reverse('index')
+
     class Meta:
         verbose_name = 'Компания'
         verbose_name_plural = 'Компании'
@@ -74,6 +77,9 @@ class Reviews(models.Model):
         max_length=254,
         verbose_name="электронная почта"
     )
+
+    def get_absolute_url(self):
+        return reverse('index')
 
     class Meta:
         verbose_name = 'Отзыв'
