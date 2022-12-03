@@ -3,21 +3,23 @@
 
 {% block content %}
 
-	<section class="">
+	<section>
 		{% for clinic in company %}
         <div class="content">
             <div class="con_left">
-					<img src="{{clinic.photo.url}}" width="300">
+					<img class="content" src="{{clinic.photo.url}}">
             </div>
             <div class="con_mid">
-				              {% for tag in clinic.tag.all %}
+				{% for tag in clinic.tag.all %}
                   <a href="" class="mr-1 badge badge-info">#{{ tag }}</a>
-              {% endfor %}
+              	{% endfor %}
+				<hr>    <!-- полоска раздела название клиники -->
                 <h3>{{ clinic.name }}</h3>
+				<hr>	<!-- полоска раздела -->
 <!--				Отображение в цикле звездочек рейтинга-->
 				{% for s in stars %}
 					{% if s %}
-						<i class="fa fa-star"></i>
+						<i class="fa fa-star" ></i>
 					{% endif %}
 				{% endfor %}
 
@@ -28,7 +30,7 @@
             </div>
             <div class="con_right">
                 <p>Цены:</p>
-                <p><a href="#">Подробнее</a></p>
+                <p><a href="#"><button type="button" class="btn btn-primary">Подробнее</button></a></p>
                 <p>{{ clinic.services }}</p>
             </div>
         </div>
@@ -86,7 +88,7 @@
 								<!--Отображение в цикле звездочек рейтинга-->
 								{% for s in stars %}
 									{% if s %}
-										<i class="fa fa-star"></i>
+										<i class="fa fa-star rat_star"></i>
 									{% endif %}
 								{% endfor %}
                             </div>
@@ -233,7 +235,6 @@
 		<div class="container">
 			<div class="section-title text-center">
 				<h2>Отзывы клиентов:</h2>
-
 			</div>
 		</div>
 

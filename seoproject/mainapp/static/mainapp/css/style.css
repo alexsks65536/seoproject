@@ -665,9 +665,11 @@ ol {
 }
 
 /*======== CONTENT ==========*/
+
 .content {
     display: flex; /*выставляем элементы горизонтально*/
     justify-content: space-evenly;
+    width: 100%;
     align-items: center;
     margin: 10px;
     padding-left: 30px;
@@ -678,6 +680,13 @@ ol {
     color:#444;
     font-weight: 600;
 }
+.content img {
+    width: 612px;
+    padding: 0px;
+    border-radius: 50px;  /* закругление углов картинок*/
+    border: 1px #ccc solid;
+    box-shadow: 0 0 1px #444;
+}
 .con_left {
     width: auto;
     margin: 10px;
@@ -685,10 +694,21 @@ ol {
 .con_mid {
     width: 500px;
     margin: 10px;
+    padding: 20px;
+    border-radius: 10px;  /* закругление углов картинок*/
+    border: 1px #ccc solid;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .con_right {
     width: 350px;
     margin: 10px;
+    padding: 20px;
+    border-radius: 10px;  /* закругление углов картинок*/
+    border: 1px #ccc solid;
+    box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.content i {
+    color: #ff6000; /* цвет звезд в рейтинге клиник */
 }
 .separator {
     margin: 0px;
@@ -749,6 +769,9 @@ ol {
 .paginate ul li {
     display: flex;
     justify-content: left;
+}
+.rat_star {
+    color: #ff6000; /* цвет звезд в таблице рейтинга клиник */
 }
 /*---------------------
   Services Section

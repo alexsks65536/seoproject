@@ -4,6 +4,7 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
+from jinja2 import Template
 
 from .forms import *
 from .models import *
