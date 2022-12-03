@@ -6,6 +6,8 @@ from .models import *
 
 
 class ContactForm(forms.ModelForm):
+    captcha = CaptchaField()
+
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields['Company'].empty_label = "Клиника не выбрана"
