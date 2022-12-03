@@ -21,7 +21,7 @@
 					{% endif %}
 				{% endfor %}
 
-				&nbsp;&nbsp;<span>Отзывов:&nbsp; {{ clinic.rating }}{{  sss  }}</span>
+				&nbsp;&nbsp;<span>Отзывов:&nbsp; {{ clinic.rating }}</span>
 
                 <p>Рейтинг: {{ clinic.stars }}</p>
                 <p class="" align="justify">{{ clinic.description }}</p>
@@ -151,7 +151,7 @@
 					</div>
 					<div class="service-content">
 						<h4>Коронки, мосты</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sem per venenatis turpis.</p>
+						<p>Современная стоматология предлагает различные варианты протезирования, позволяющие восстановить разрушение или утрату одного, двух или нескольких зубов.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 service">
@@ -160,7 +160,7 @@
 					</div>
 					<div class="service-content">
 						<h4>Импланты</h4>
-						<p>Phasellus vehicula tempus orci vel consequat. Nullam lorem sem, viverra a rutrum sed.</p>
+						<p>Имплантация – современная технология установки искусственных зубов, которая обходит по всем параметрам классическое протезирование.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 service">
@@ -169,7 +169,7 @@
 					</div>
 					<div class="service-content">
 						<h4>Отбеливание зубов</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sem per venenatis turpis,</p>
+						<p>Отбеливание зубов – процедура, направленная на изменение цвета зубов.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 service">
@@ -178,7 +178,7 @@
 					</div>
 					<div class="service-content">
 						<h4>Чистка каналов</h4>
-						<p>Phasellus vehicula tempus orci vel consequat. Nullam lorem sem, viverra a rutrum sed.</p>
+						<p>Чистка каналов зуба – точная процедура связанная с удалением нерва в зубе.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 service">
@@ -187,7 +187,7 @@
 					</div>
 					<div class="service-content">
 						<h4>Зубы мудрости</h4>
-						<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis sem per venenatis turpis,</p>
+						<p>Удаление зуба мудрости это хирургическое вмешательство, в ходе которого происходит извлечение.</p>
 					</div>
 				</div>
 				<div class="col-lg-4 col-md-6 service">
@@ -196,7 +196,7 @@
 					</div>
 					<div class="service-content">
 						<h4>Брекеты</h4>
-						<p>Nullam lorem sem, viverra a rutru m sed, gravida mattis magna. Suspendisse vitae commodo.</p>
+						<p>Брекеты – это особая ортодонтическая конструкция, применяемая для исправления прикуса различной степени сложности.</p>
 					</div>
 				</div>
 			</div>
@@ -226,60 +226,36 @@
 	</div>
 	<!-- Gallery section end -->
 
-	<a name="reviews"></a>
+
 	<!-- Отзывы 'Reviews' -->
+	<a name="reviews"></a>
 	<section class="testimonials-section spad">
 		<div class="container">
 			<div class="section-title text-center">
 				<h2>Отзывы клиентов:</h2>
+
 			</div>
 		</div>
 
 		<div class="testimonials-warp">
 			<div class="testimonials-slider owl-carousel">
-
+			{% for i in reviews %}
 				<div class="testimonial-item">
 					<div class="ts-content">
 						<div class="quta">“</div>
-						<p>Tempus orci vel consequat. Nullam lorem sem, viverra a rutrum sed, gravida mattis magna. Suspendisse vitae commodo quam. Quisque a enim et ante vulputate finibus.</p>
-						<h6>Jessica Brown{{ company.name }}</h6>
-						<span>Pacient 1</span>
+						<p>{{ i.description }}</p>
+						<h6>{{ i.name }}</h6>
+						<span>{{ i.Company }}</span>
+						<p>{{ i.stars }}</p>
 					</div>
-					<div class="author-pic set-bg" data-setbg="{% static 'mainapp/img/review/1.jpg' %}"></div>
+					<div class="author-pic set-bg" data-setbg="{{i.Company.photo.url}}"></div>
 				</div>
-
-				<div class="testimonial-item">
-					<div class="ts-content">
-						<div class="quta">“</div>
-						<p>Nullam lorem sem, viverra a rutrum sed, gravida mattis magna. Suspendisse vitae commodo quam. Quisque a enim et ante vulputate finibus.</p>
-						<h6>Jessica Brown</h6>
-						<span>Pacient 2</span>
-					</div>
-					<div class="author-pic set-bg" data-setbg="{% static 'mainapp/img/review/2.jpg' %}"></div>
-				</div>
-				<div class="testimonial-item">
-					<div class="ts-content">
-						<div class="quta">“</div>
-						<p>Phasellus vehicula tempus orci vel consequat. Nullam lorem sem, viverra a rutrum sed, gravida mattis magna. Suspendisse vitae commodo quam. Quisque a enim et ante vulputate finibus nec laoreet ipsum.</p>
-						<h6>Jessica Brown</h6>
-						<span>Pacient 3</span>
-					</div>
-					<div class="author-pic set-bg" data-setbg="{% static 'mainapp/img/review/3.jpg' %}"></div>
-				</div>
-				<div class="testimonial-item">
-					<div class="ts-content">
-						<div class="quta">“</div>
-						<p>Tempus orci vel consequat. Nullam lorem sem, viverra a rutrum sed, gravida mattis magna. Suspendisse vitae commodo quam. Quisque a enim et ante vulputate finibus.</p>
-						<h6>Jessica Brown</h6>
-						<span>Pacient 4</span>
-					</div>
-					<div class="author-pic set-bg" data-setbg="{% static 'mainapp/img/review/2.jpg' %}"></div>
-				</div>
+			{% endfor %}
 			</div>
 		</div>
 	</section>
 	<!-- Отзывы 'Reviews' end -->
-{% for i in reviews %}
-	<div>{{ i.name }}</div>
-{% endfor %}
+
+
+
 {% endblock %}

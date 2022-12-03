@@ -7,6 +7,7 @@ from django.views.generic import ListView, CreateView, DetailView
 
 from .forms import *
 from .models import *
+from .utils import DataMixin
 
 menu = [{'title': 'Главная', 'url_name': 'index'},
         {'title': 'Оставить отзыв', 'url_name': 'add_review'},
@@ -16,7 +17,7 @@ menu = [{'title': 'Главная', 'url_name': 'index'},
 message = 'Нажмите на заголовок, чтобы отсортировать колонку!'
 
 
-class Index(ListView):
+class Index(ListView, DataMixin):
     paginate_by = 10
     model = Company
     template_name = 'mainapp/index.html'  # указываем путь к шаблону
@@ -26,10 +27,10 @@ class Index(ListView):
         context = super().get_context_data(**kwargs)
         context['menu'] = menu
         context['message'] = message
-        # star = Company.stars
         context['stars'] = [i for i in range(1, 6)]
+        c_def = self.get_user_context(title=context['company'])
 
-        return context
+        return dict(list(context.items()) + list(c_def.items()))  # объединение словарей для передачи контекста
 
 
 class AddReview(CreateView):  # Добавить отзыв
