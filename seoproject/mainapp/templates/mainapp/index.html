@@ -5,10 +5,13 @@
 
 	<section>
 		{% for clinic in company %}
+					<article id="{{ clinic.slug }}"></article>  <!--Якорь-->
         <div class="content">
+<!--			поле фото клиник-->
             <div class="con_left">
 					<img class="content" src="{{clinic.photo.url}}">
             </div>
+<!--			поле вывода тегов, описание, рейтинг, оценка клиник-->
             <div class="con_mid">
 				{% for tag in clinic.tag.all %}
                   <a href="" class="mr-1 badge badge-info">#{{ tag }}</a>
@@ -16,27 +19,27 @@
 				<hr>    <!-- полоска раздела название клиники -->
                 <h3>{{ clinic.name }}</h3>
 				<hr>	<!-- полоска раздела -->
-<!--				Отображение в цикле звездочек рейтинга-->
+<!--			Отображение в цикле звездочек рейтинга-->
 				{% for s in stars %}
 					{% if s %}
 						<i class="fa fa-star" ></i>
 					{% endif %}
 				{% endfor %}
-
 				&nbsp;&nbsp;<span>Отзывов:&nbsp; {{ clinic.rating }}</span>
-
                 <p>Рейтинг: {{ clinic.stars }}</p>
-                <p class="" align="justify">{{ clinic.description }}</p>
+                <p>{{ clinic.description | safe }}</p>
             </div>
+<!--			поле вывода телефона, адреса, цены, услуг-->
             <div class="con_right">
-                <p>Цены:</p>
+                <p class="con_service">Цены: от 500 р.</p>
                 <p><a href="#"><button type="button" class="btn btn-primary">Подробнее</button></a></p>
-                <p>{{ clinic.services }}</p>
+                <p>{{ clinic.services | safe }}</p>
             </div>
         </div>
+{% include 'mainapp/btn_home.html' %}  <!-- Домой -->
+		<hr>
 		{% endfor %}
-
-        <!--Конец основного контента-->
+<!--	Конец основного контента-->
         <div class="separator">&nbsp;
 			<!--вывод списка страниц для пагинации-->
 			<div align="center">
@@ -76,11 +79,11 @@
                     <tr class="tr_rating">
                         <td>
 							<div class="img_rating">
-								<a href="#">
+								<a href="#{{ clinic.slug }}">
 									<img src="{{clinic.photo.url}}" height=50px alt="" align="left">
+										&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+									{{ clinic.name }}
 								</a>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<span>{{ clinic.name }}</span>
 							</div>
                         </td>
                         <td>
@@ -94,15 +97,15 @@
                             </div>
                             <b style="display: none" class="tablet_show">5/5</b>
                         </td>
-                        <td><b style="color: #00aa08">{{ clinic.rating }}</b></td>
+                        <td><b style="color: #0000FF">{{ clinic.rating }}</b></td>
                         <td><b style="color: #aa0000">{{ clinic.stars }}</b></td>
-                        <td><b style="color: #00aa08">{{ clinic.rating }}</b></td>
+                        <td><b style="color: #0000FF">{{ clinic.rating }}</b></td>
                     </tr>
                 </tbody>
 						{% endfor %}
             </table>
         </div>
-
+{% include 'mainapp/btn_home.html' %}  <!-- Домой -->
 	</section>
 	<!--конец таблицы рейтингов-->
 {% endblock rating %}
@@ -203,6 +206,7 @@
 				</div>
 			</div>
 		</div>
+		{% include 'mainapp/btn_home.html' %}  <!-- Домой -->
 	</section>
 	<!-- Services section end -->
 
@@ -211,6 +215,7 @@
 	<div class="gallery-section">
 		<div class="container-fluid">
 			<div class="row">
+		{#		{% for i in stars %}  #}
 				<div class="col-lg-3 col-sm-6 p-0">
 					<img src="{% static 'mainapp/img/gallery/1.jpg' %}" alt="">
 				</div>
@@ -222,6 +227,7 @@
 				</div>
 				<div class="col-lg-3 col-sm-6 p-0">
 					<img src="{% static 'mainapp/img/gallery/4.jpg' %}" alt="">
+		{#		{% endfor %}  #}
 				</div>
 			</div>
 		</div>
@@ -246,7 +252,9 @@
 						<div class="quta">“</div>
 						<p>{{ i.description }}</p>
 						<h6>{{ i.name }}</h6>
-						<span>{{ i.Company }}</span>
+						<a href="#{{ i.Company.slug }}">
+							<span>{{ i.Company }}</span>
+						</a>
 						<p>{{ i.stars }}</p>
 					</div>
 					<div class="author-pic set-bg" data-setbg="{{i.Company.photo.url}}"></div>
@@ -254,6 +262,7 @@
 			{% endfor %}
 			</div>
 		</div>
+		{% include 'mainapp/btn_home.html' %}  <!-- Домой -->
 	</section>
 	<!-- Отзывы 'Reviews' end -->
 

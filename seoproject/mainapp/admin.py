@@ -10,6 +10,7 @@ class CompanyAdmin(admin.ModelAdmin):
     search_fields = ('name', 'rating', 'stars')
     list_filter = ('name', 'rating', 'stars', 'time_create', 'tag')
     prepopulated_fields = {"slug": ("name",)}
+    save_on_top = True
 
     def get_html_photo(self, object):
         if object.photo:
@@ -21,6 +22,7 @@ class ReviewsAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name')
     list_filter = ('name', 'Company', 'stars')
     search_fields = ('name', 'Company')
+    save_on_top = True
 
 
 admin.site.register(Reviews, ReviewsAdmin)
