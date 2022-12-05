@@ -12,10 +12,7 @@ from .utils import DataMixin
 
 menu = [{'title': 'Главная', 'url_name': 'index'},
         {'title': 'Оставить отзыв', 'url_name': 'add_review'},
-        # {'title': 'Обратная связь', 'url_name': 'contact'},
         ]
-
-message = 'Нажмите на заголовок, чтобы отсортировать колонку!'
 
 
 class Index(ListView, DataMixin):
@@ -27,7 +24,6 @@ class Index(ListView, DataMixin):
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
         context['menu'] = menu
-        context['message'] = message
         template = """<i class="fa fa-star" ></i>"""
         t = Template(template)
         c = Context({})
