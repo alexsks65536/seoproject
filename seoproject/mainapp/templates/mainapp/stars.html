@@ -1,0 +1,15 @@
+<!--		шаблон для отображения звездочек рейтинга клиник-->
+
+		{% if clinic.stars == 1 %}
+			{{ t }}
+		{% elif clinic.stars == 2 %}
+			{{ t }}{{ t }}
+		{% elif clinic.stars == 3 %}
+			{{ t }}{{ t }}{{ t }}
+		{% elif clinic.stars == 4 %}
+			{{ t }}{{ t }}{{ t }}{{ t }}
+		{% elif clinic.stars == 5 %}
+			{{ t }}{{ t }}{{ t }}{{ t }}{{ t }}
+		{% else %}
+			{{ t }}{{ t }}{{ t }}{{ t }}{{ t }}
+		{% endif %}

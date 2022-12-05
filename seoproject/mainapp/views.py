@@ -4,7 +4,7 @@ from django.contrib.auth.views import LoginView
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
-from jinja2 import Template
+from django.template import Template, Context
 
 from .forms import *
 from .models import *
@@ -28,7 +28,10 @@ class Index(ListView, DataMixin):
         context = super().get_context_data(**kwargs)
         context['menu'] = menu
         context['message'] = message
-        context['stars'] = [i for i in range(1, 6)]
+        template = """<i class="fa fa-star" ></i>"""
+        t = Template(template)
+        c = Context({})
+        context['t'] = t.render(c)
         c_def = self.get_user_context(title=context['company'])
 
         return dict(list(context.items()) + list(c_def.items()))  # объединение словарей для передачи контекста
