@@ -23,8 +23,12 @@ class Index(ListView, DataMixin):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
+        company_all = Company.objects.all()
+        count_company = len(company_all)  # кол-во клиник
+        context['count_company'] = count_company
         context['menu'] = menu
-        template = """<i class="fa fa-star" ></i>"""
+        context['count_four'] = [1, 2, 3, 4]  # счетчик для вывода объектов в цикле
+        template = """<i class="fa fa-star" ></i>"""  # шаблон для рисования звезд рейтинга
         t = Template(template)
         c = Context({})
         context['t'] = t.render(c)
