@@ -44,11 +44,11 @@
 <!--	Конец основного контента-->
         <div class="separator">&nbsp;
 			<!--вывод списка страниц для пагинации-->
-			<div align="center">
+			<div class="page_site" align="center">
 				{% for p in paginator.page_range %}
 					<ul class="main-menu" style="float:inherit;">
 						<li>
-							<a href="?page={{ p }}">{{ p }}</a>
+							<a href="?page={{ p }}"><span class="btn btn-primary btn-sm">{{ p }}</span></a>
 						</li>
 					</ul>
 				{% endfor %}
@@ -95,9 +95,9 @@
                             </div>
                             <b style="display: none" class="tablet_show">5/5</b>
                         </td>
-                        <td><b style="color: #0000FF">{{ clinic.rating }}</b></td>
-                        <td><b style="color: #aa0000">{{ clinic.stars }}</b></td>
-                        <td><b style="color: #0000FF">{{ clinic.profit }}</b></td>
+                        <td class="rating_rate">{{ clinic.rating }}</td>
+                        <td class="rating_not">{{ clinic.stars }}</td>
+                        <td class="rating_rate">{{ clinic.profit }}</td>
                     </tr>
                 </tbody>
 						{% endfor %}
