@@ -52,6 +52,11 @@ class Company(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def profit(self):
+        company_profit = self.stars * self.rating
+        return company_profit
+
 
 class Reviews(models.Model):
     name = models.CharField(

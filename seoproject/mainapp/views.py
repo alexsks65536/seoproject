@@ -36,6 +36,9 @@ class Index(ListView, DataMixin):
 
         return dict(list(context.items()) + list(c_def.items()))  # объединение словарей для передачи контекста
 
+    def __mul__(self, other):
+        return Index(self.value * other.value)
+
 
 class AddReview(CreateView):  # Добавить отзыв
     form_class = ContactForm  # Указываем форму
