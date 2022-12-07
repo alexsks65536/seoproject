@@ -1,10 +1,15 @@
+"""
+Класс содержит дополнительные переменные и таблицы БД,
+которые подключаются к контексту в классах view
+"""
+
 from .models import *
 
 
 message = 'Нажмите на заголовок, чтобы отсортировать колонку!'
 
 
-class DataMixin:  # подключение модели Reviews
+class DataMixin:
     def get_user_context(self, **kwargs):
         context = kwargs
         reviews = Reviews.objects.all()  # таблица отзывы
