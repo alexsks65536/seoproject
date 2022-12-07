@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Reviews, Company
+from .models import Reviews, Company, Services
 
 
 class CompanyAdmin(admin.ModelAdmin):
@@ -25,5 +25,14 @@ class ReviewsAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
-admin.site.register(Reviews, ReviewsAdmin)
+class ServicesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'description', 'icon')
+    list_display_links = ('id', 'name')
+    list_filter = ('name',)
+    search_fields = ('name',)
+    save_on_top = True
+
+
 admin.site.register(Company, CompanyAdmin)
+admin.site.register(Reviews, ReviewsAdmin)
+admin.site.register(Services, ServicesAdmin)

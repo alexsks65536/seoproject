@@ -149,60 +149,17 @@
 				<h2>Услуги</h2>
 			</div>
 			<div class="row">
+				{% for s in services %}
 				<div class="col-lg-4 col-md-6 service">
 					<div class="service-icon">
-						<i class="flaticon-020-decay"></i>
+						{{ s.icon | safe }}
 					</div>
 					<div class="service-content">
-						<h4>Коронки, мосты</h4>
-						<p>Современная стоматология предлагает различные варианты протезирования, позволяющие восстановить разрушение или утрату одного, двух или нескольких зубов.</p>
+						<h4>{{ s.name }}</h4>
+						<p>{{ s.description }}</p>
 					</div>
 				</div>
-				<div class="col-lg-4 col-md-6 service">
-					<div class="service-icon">
-						<i class="flaticon-011-implants"></i>
-					</div>
-					<div class="service-content">
-						<h4>Импланты</h4>
-						<p>Имплантация – современная технология установки искусственных зубов, которая обходит по всем параметрам классическое протезирование.</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 service">
-					<div class="service-icon">
-						<i class="flaticon-024-toothbrush"></i>
-					</div>
-					<div class="service-content">
-						<h4>Отбеливание зубов</h4>
-						<p>Отбеливание зубов – процедура, направленная на изменение цвета зубов.</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 service">
-					<div class="service-icon">
-						<i class="flaticon-019-dentist"></i>
-					</div>
-					<div class="service-content">
-						<h4>Чистка каналов</h4>
-						<p>Чистка каналов зуба – точная процедура связанная с удалением нерва в зубе.</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 service">
-					<div class="service-icon">
-						<i class="flaticon-001-tooth-4"></i>
-					</div>
-					<div class="service-content">
-						<h4>Зубы мудрости</h4>
-						<p>Удаление зуба мудрости это хирургическое вмешательство, в ходе которого происходит извлечение.</p>
-					</div>
-				</div>
-				<div class="col-lg-4 col-md-6 service">
-					<div class="service-icon">
-						<i class="flaticon-029-braces"></i>
-					</div>
-					<div class="service-content">
-						<h4>Брекеты</h4>
-						<p>Брекеты – это особая ортодонтическая конструкция, применяемая для исправления прикуса различной степени сложности.</p>
-					</div>
-				</div>
+				{% endfor %}
 			</div>
 		</div>
 

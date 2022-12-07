@@ -88,3 +88,35 @@ class Reviews(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Services(models.Model):
+    """
+    Справочник услуг клиник
+    """
+    name = models.CharField(
+        verbose_name="Услуга",
+        max_length=255,
+        unique=True,
+        blank=True
+    )
+    description = models.TextField(
+        verbose_name="Описание",
+        blank=True
+    )
+    icon = models.CharField(  # в виде тега, шрифт: https://fontawesome.com/
+        verbose_name="Иконка",
+        max_length=255,
+        blank=True
+    )
+
+    def get_absolute_url(self):
+        return reverse('index')
+
+    class Meta:
+        verbose_name = 'Услуга'
+        verbose_name_plural = 'Услуги'
+        ordering = ['id', 'name']
+
+    def __str__(self):
+        return self.name
