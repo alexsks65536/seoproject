@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
@@ -5,13 +7,21 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
 from django.template import Template, Context
-
+from .forms import FeedBackForm
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.mail import send_mail, BadHeaderError
+from django.shortcuts import render, get_object_or_404
+from django.views import View
 from .forms import *
 from .models import *
 from .utils import DataMixin
+from dotenv import load_dotenv
+
+load_dotenv()
 
 menu = [{'title': 'Главная', 'url_name': 'index'},
         {'title': 'Оставить отзыв', 'url_name': 'add_review'},
+        {'title': 'Связаться с нами', 'url_name': 'contact'}
         ]
 
 
@@ -101,3 +111,34 @@ def logout_user(request):
     logout(request)
     return redirect('login')
 
+
+class FeedBackView(View):
+    def get(self, request, *args, **kwargs):
+        form = FeedBackForm()
+        return render(request, 'mainapp/contact.html', context={
+            'form': form,
+            'title': 'Написать мне'
+        })
+
+    def post(self, request, *args, **kwargs):
+        form = FeedBackForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            from_email = form.cleaned_data['email']
+            subject = form.cleaned_data['subject']
+            message = form.cleaned_data['message']
+            try:
+                send_mail(f'От {name} | {from_email} | {subject}', message, from_email, [os.getenv('EMAIL_HOST_USER')])
+            except BadHeaderError:
+                return HttpResponse('Невалидный заголовок')
+            return HttpResponseRedirect('success')
+        return render(request, 'mainapp/contact.html', context={
+            'form': form,
+        })
+
+
+class SuccessView(View):
+    def get(self, request, *args, **kwargs):
+        return render(request, 'mainapp/success.html', context={
+            'title': 'Спасибо'
+        })
