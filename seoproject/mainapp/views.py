@@ -27,17 +27,35 @@ class Index(ListView, DataMixin):
         count_company = len(company_all)  # кол-во клиник
         context['count_company'] = count_company
         context['menu'] = menu
-        context['count_four'] = [1, 2, 3, 4]  # счетчик для вывода объектов в цикле
-        template = """<i class="fa fa-star" ></i>"""  # шаблон для рисования звезд рейтинга
-        t = Template(template)
-        c = Context({})
-        context['t'] = t.render(c)
         c_def = self.get_user_context(title=context['company'])
 
         return dict(list(context.items()) + list(c_def.items()))  # объединение словарей для передачи контекста
 
     def __mul__(self, other):
         return Index(self.value * other.value)
+
+    def get_queryset(self, *, object_list=None, **kwargs):
+        """
+        Выбор отзывов, которые помечены для публикации
+        """
+        return Company.objects.filter(is_published=True)
+
+
+class ShowCompany(DetailView, DataMixin):
+    model = Company
+    template_name = 'mainapp/show_company.html'  # указываем путь к шаблону
+    context_object_name = 'company'  # переменная контекста
+    slug_url_kwarg = 'company_slug'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        company_all = Company.objects.all()
+        count_company = len(company_all)  # кол-во клиник
+        context['count_company'] = count_company
+        context['menu'] = menu
+        c_def = self.get_user_context(title=context['company'])
+
+        return dict(list(context.items()) + list(c_def.items()))  # объединение словарей для передачи контекста
 
 
 class AddReview(CreateView):  # Добавить отзыв
@@ -82,3 +100,4 @@ class LoginUser(LoginView):
 def logout_user(request):
     logout(request)
     return redirect('login')
+

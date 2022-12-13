@@ -1,0 +1,44 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<article id="{{ company.slug }}"></article>  <!--Якорь-->
+
+        <div class="content">
+<!--			поле фото клиник-->
+            <div class="con_left">
+					<img class="content" src="{{company.photo.url}}">
+            </div>
+<!--			поле вывода тегов, описание, рейтинг, оценка клиник-->
+            <div class="con_mid">
+				{% for tag in company.tag.all %}
+                  <a href="" class="mr-1 badge badge-info">#{{ tag }}</a>
+              	{% endfor %}
+<!--			название клиники -->
+<!--			полоска раздела-->
+				<hr>
+                <h3>{{ company.name }}</h3>
+				<hr>
+
+<!-- 			Отображение звездочек рейтинга клиник -->
+				<span>Рейтинг: {% include 'mainapp/stars.html' %}</span>
+				&nbsp;&nbsp;<span>Отзывов:&nbsp; {{ company.rating }}</span>
+
+<!--			Описание клиники-->
+				{% autoescape off %}
+                <p>{{ company.description | linebreaks }}</p>
+				{% endautoescape %}
+            </div>
+
+<!--			поле вывода телефона, адреса, цены, услуг-->
+            <div class="con_right">
+                <p class="con_service">Цены: от 500 р.</p>
+
+				{% autoescape off %}
+                <p>{{ company.services | linebreaks}}</p>
+				{% endautoescape %}
+            </div>
+        </div>
+
+		<hr>
+{% endblock %}

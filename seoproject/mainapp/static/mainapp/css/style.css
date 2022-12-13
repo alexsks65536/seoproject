@@ -717,7 +717,8 @@ ol {
     color: #ff6000; /* цвет звезд в рейтинге клиник */
 }
 .separator {
-    margin: 0px;
+    display: flex;
+    justify-content: center; /*центрирование элементов*/
     padding: 7px;
     background-color: #EEE;
 }
@@ -793,6 +794,11 @@ ol {
 .paginate ul li {
     display: flex;
     justify-content: left;
+}
+.page_site {
+    width: auto;
+    height: auto;
+    border: 0px solid #000;
 }
 .rat_star i {
     color: #ff6000; /* цвет звезд в таблице рейтинга клиник */
@@ -1478,7 +1484,6 @@ ol {
   font-size: 14px;
   color: #696969;
 }
-
 .site-pagination {
   padding-top: 40px;
   display: -webkit-box;

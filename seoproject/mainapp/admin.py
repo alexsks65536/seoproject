@@ -5,10 +5,10 @@ from .models import Reviews, Company, Services
 
 
 class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'time_create', 'get_html_photo', 'stars')
+    list_display = ('id', 'name', 'get_html_photo', 'stars', 'time_create', 'is_published')
     list_display_links = ('id', 'name')
-    search_fields = ('name', 'rating', 'stars')
-    list_filter = ('name', 'rating', 'stars', 'time_create', 'tag')
+    search_fields = ('name', 'rating', 'stars', 'is_published')
+    list_filter = ('name', 'rating', 'stars', 'time_create', 'tag', 'is_published')
     prepopulated_fields = {"slug": ("name",)}
     save_on_top = True
 
@@ -18,10 +18,10 @@ class CompanyAdmin(admin.ModelAdmin):
 
 
 class ReviewsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'email', 'Company', 'description')
+    list_display = ('id', 'name', 'email', 'description', 'Company', 'time_create', 'is_published')
     list_display_links = ('id', 'name')
-    list_filter = ('name', 'Company', 'stars')
-    search_fields = ('name', 'Company')
+    list_filter = ('name', 'Company', 'stars', 'is_published')
+    search_fields = ('name', 'Company', 'is_published')
     save_on_top = True
 
 

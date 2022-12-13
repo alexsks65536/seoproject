@@ -27,14 +27,26 @@
 				&nbsp;&nbsp;<span>Отзывов:&nbsp; {{ clinic.rating }}</span>
 
 <!--			Описание клиники-->
-                <p>{{ clinic.description | safe }}</p>
+				{% autoescape off %}
+                <p>{{ clinic.description | linebreaks | truncatewords:20 }}
+				<a href="{{ clinic.get_absolute_url }}">читать далее</a>
+				</p>
+				{% endautoescape %}
             </div>
 
 <!--			поле вывода телефона, адреса, цены, услуг-->
             <div class="con_right">
                 <p class="con_service">Цены: от 500 р.</p>
-                <p><a href="#"><button type="button" class="btn btn-primary">Подробнее</button></a></p>
-                <p>{{ clinic.services | safe }}</p>
+                <p>
+					<a href="{{ clinic.get_absolute_url }}">
+					<button type="button" class="btn btn-primary">Подробнее</button>
+					</a>
+				</p>
+				{% autoescape off %}
+                <p>{{ clinic.services | linebreaks | truncatewords:20 }}
+				<a href="{{ clinic.get_absolute_url }}">читать далее</a>
+				</p>
+				{% endautoescape %}
             </div>
         </div>
 
@@ -44,14 +56,34 @@
 <!--	Конец основного контента-->
         <div class="separator">&nbsp;
 			<!--вывод списка страниц для пагинации-->
-			<div class="page_site" align="center">
-				{% for p in paginator.page_range %}
-					<ul class="main-menu" style="float:inherit;">
-						<li>
-							<a href="?page={{ p }}"><span class="btn btn-primary btn-sm">{{ p }}</span></a>
-						</li>
-					</ul>
-				{% endfor %}
+			<div class="page_site">
+                {% if page_obj.has_other_pages %}
+                        <ul class="pagination">
+                            {% if page_obj.has_previous %} <!--отображение стрелки влево &lt <  ...   -->
+                                <li class="page-item">
+                                    <a href="?page={{ page_obj.previous_page_number }}" class="page-link" aria-label="Previous">
+										<span aria-hidden="true">&laquo;</span>
+									</a>
+                                </li>
+                            {% endif %}
+                            {% for p in paginator.page_range %}
+                                {% if page_obj.number == p %}
+                                    <li class="page-item"><span class="page-link" >{{ p }}</span></li>
+                                {% elif p >= page_obj.number|add:-2 and p <= page_obj.number|add:2 %}<!--обрезание по 2 ссылки-->
+                                    <li class="page-item">
+                                        <a href="?page={{ p }}"><span class="page-link" >{{ p }}</span></a>
+                                    </li>
+                                {% endif %}
+                            {% endfor %}
+                            {% if page_obj.has_next %} <!--отображение стрелки вправо &gt ... >  -->
+                                <li class="page-item">
+                                    <a href="?page={{ page_obj.next_page_number }}" class="page-link" aria-label="Previous">
+										<span aria-hidden="true">&raquo;</span>
+									</a>
+                                </li>
+                            {% endif %}
+                        </ul>
+                {% endif %}
 			</div>
 		</div>
 	</section>
@@ -63,6 +95,7 @@
 	<!--РЕЙТИНГ-->
 	<a name="ratings"></a>
 	<!--Таблица рейтингов-->
+<h3 align="center"> Рейтинги клиник: </h3>
 	<section class="">
         <div class="rating">
             <table class="tab_rating">
@@ -216,7 +249,6 @@
 
 	</section>
 	<!-- Отзывы 'Reviews' end -->
-
 
 
 {% endblock %}

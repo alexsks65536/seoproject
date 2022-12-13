@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-	<title>ProDent - Dentist Template</title>
+	<title>ProDent - Стоматологии Москвы</title>
 	<meta charset="UTF-8">
 	<meta name="description" content="Стоматологии Москвы">
 	<meta name="keywords" content="Стоматологии, коронки, виниры, зубной мост, лечение зубов">
@@ -40,7 +40,7 @@
 	<header class="header-section">
 		<div class="container">
 			<!-- Site Logo -->
-			<a href="/" class="site-logo">
+			<a href="{% url 'index' %}" class="site-logo">
 				<img src="{% static 'mainapp/img/logo.png' %}" alt="">
 			</a>
 			<!-- responsive -->
@@ -49,6 +49,7 @@
 			</div>
 			<!-- Main Menu -->
 		{% include 'mainapp/main_menu.html' %}
+
 		</div>
 		<div class="header-info">
 			<div class="container">
@@ -156,7 +157,7 @@
 							<h5 class="fw-title">Услуги клиник</h5>
 							<ul>
 								{% for s in services %}
-										<li><a href="#">{{ s.name }}</a></li>
+										<li><a href="#services">{{ s.name }}</a></li>
 								{% endfor %}
 							</ul>
 						</div>

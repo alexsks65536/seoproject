@@ -1,6 +1,10 @@
+from django.core.validators import MinValueValidator, MaxValueValidator
 from django.db import models
 from django.urls import reverse
 from taggit.managers import TaggableManager
+
+
+STARS = zip(range(1, 6), range(1, 6))
 
 
 class Company(models.Model):
@@ -17,11 +21,13 @@ class Company(models.Model):
         blank=True,
         verbose_name="Оказываемые услуги"
     )
-    rating = models.IntegerField(
+    rating = models.PositiveIntegerField(
         verbose_name="Цифра рейтинга",
         blank=True
     )
     stars = models.IntegerField(
+        default=5,
+        choices=STARS,
         verbose_name="Кол-во звезд от 1-5",
         blank=True
     )
@@ -39,10 +45,13 @@ class Company(models.Model):
         auto_now_add=True,
         verbose_name="Время создания"
     )
+    is_published = models.BooleanField(
+        default=True, verbose_name="Опубликовано"
+    )
     tag = TaggableManager()
 
     def get_absolute_url(self):
-        return reverse('index')
+        return reverse('show_company', kwargs={'company_slug': self.slug})
 
     class Meta:
         verbose_name = 'Компания'
@@ -66,7 +75,7 @@ class Reviews(models.Model):
         blank=True
     )
     description = models.TextField(
-        verbose_name="описание",
+        verbose_name="Отзыв",
         blank=True
     )
     Company = models.ForeignKey(
@@ -74,13 +83,23 @@ class Reviews(models.Model):
         related_name="+",
         on_delete=models.CASCADE
     )
-    stars = models.IntegerField(
+    stars = models.PositiveIntegerField(
+        default=5,
+        validators=[MinValueValidator(1),
+                    MaxValueValidator(5)],
         verbose_name="Кол-во звезд от 1-5",
-        blank=True
+        blank=False
     )
     email = models.EmailField(
         max_length=254,
-        verbose_name="электронная почта"
+        verbose_name="Электронная почта"
+    )
+    time_create = models.DateField(
+        auto_now_add=True,
+        verbose_name="Время создания"
+    )
+    is_published = models.BooleanField(
+        default=False, verbose_name="Опубликовано"
     )
 
     def get_absolute_url(self):

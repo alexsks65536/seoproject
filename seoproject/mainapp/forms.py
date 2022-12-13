@@ -14,11 +14,12 @@ class ContactForm(forms.ModelForm):
 
     class Meta:
         model = Reviews
-        fields = '__all__'  # список ВСЕХ полей формы
+        # fields = '__all__'  # список ВСЕХ полей формы
+        fields = ['name', 'description', 'Company', 'stars', 'email']
         # виджеты с классами для полей
         widgets = {
             'name': forms.TextInput(attrs={'class': 'form_settings input'}),
-            'description': forms.Textarea(attrs={'class': 'form_settings textarea', 'cols': 70, 'rows': 12}),  #
+            'description': forms.Textarea(attrs={'class': 'form_settings textarea', 'cols': 70, 'rows': 12}),
         }
 
     def clean_name(self):
