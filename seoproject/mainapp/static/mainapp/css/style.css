@@ -502,7 +502,15 @@ ol {
 .main-menu li.active a:hover {
   color: #fff;
 }
-
+.header-slogan {
+    display: block;
+    margin: 0 auto 10px;
+    text-align: center;
+    color: #007bff;
+}
+.header-slogan h5 {
+    color: #007bff;
+}
 .header-info {
   padding-top: 46px;
   padding-bottom: 7px;
@@ -646,7 +654,6 @@ ol {
   font-weight: 600;
   margin-bottom: 35px;
 }
-
 /*---------------------
   Facts Section
 -----------------------*/

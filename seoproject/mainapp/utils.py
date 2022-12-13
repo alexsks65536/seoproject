@@ -14,10 +14,12 @@ class DataMixin:
         context = kwargs
         reviews = Reviews.objects.filter(is_published=True).all()  # таблица отзывы
         services = Services.objects.all()  # таблица услуги
+        sitevars = SiteVars.objects.all()  # Переменные сайта
         count_reviews = len(reviews)  # кол-во отзывов в общем
         context['count_reviews'] = count_reviews
         context['reviews'] = reviews
         context['services'] = services
+        context['sitevars'] = sitevars
         context['message'] = message
         template = """<i class="fa fa-star" ></i>"""  # шаблон для рисования звезд рейтинга
         t = Template(template)

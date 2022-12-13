@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Reviews, Company, Services
+from .models import Reviews, Company, Services, SiteVars
 
 
 class CompanyAdmin(admin.ModelAdmin):
@@ -33,6 +33,11 @@ class ServicesAdmin(admin.ModelAdmin):
     save_on_top = True
 
 
+class SiteVarsAdmin(admin.ModelAdmin):
+    save_on_top = True
+
+
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Reviews, ReviewsAdmin)
 admin.site.register(Services, ServicesAdmin)
+admin.site.register(SiteVars, SiteVarsAdmin)

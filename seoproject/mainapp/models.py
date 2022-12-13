@@ -8,6 +8,9 @@ STARS = zip(range(1, 6), range(1, 6))
 
 
 class Company(models.Model):
+    """
+    Описание клиник
+    """
     name = models.CharField(
         verbose_name="Наименование компании",
         max_length=64,
@@ -68,6 +71,9 @@ class Company(models.Model):
 
 
 class Reviews(models.Model):
+    """
+    Отзывы клиентов
+    """
     name = models.CharField(
         verbose_name="ФИО",
         max_length=64,
@@ -144,3 +150,73 @@ class Services(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class SiteVars(models.Model):
+    """
+    Переменные сайта
+    """
+    logo = models.ImageField(
+        upload_to="clinics/images/",
+        verbose_name="Логотип"
+    )
+    head_slogan = models.CharField(
+        verbose_name="Слоган сайта",
+        max_length=255,
+        blank=True
+    )
+    site_title = models.CharField(
+        verbose_name="Заголовок сайта",
+        max_length=255,
+        blank=True
+    )
+    meta_tags = models.CharField(
+        verbose_name="Мета теги",
+        max_length=255,
+        blank=True
+    )
+    footer_slogan = models.CharField(
+        verbose_name="Слоган футера",
+        max_length=255,
+        blank=True
+    )
+    icon_1 = models.CharField(
+        verbose_name="Иконка соцсетей 1",
+        max_length=255,
+        blank=True
+    )
+    icon_2 = models.CharField(
+        verbose_name="Иконка соцсетей 2",
+        max_length=255,
+        blank=True
+    )
+    icon_3 = models.CharField(
+        verbose_name="Иконка соцсетей 3",
+        max_length=255,
+        blank=True
+    )
+    icon_4 = models.CharField(
+        verbose_name="Иконка соцсетей 4",
+        max_length=255,
+        blank=True
+    )
+    icon_5 = models.CharField(
+        verbose_name="Иконка соцсетей 5",
+        max_length=255,
+        blank=True
+    )
+    icon_6 = models.CharField(
+        verbose_name="Иконка соцсетей 6",
+        max_length=255,
+        blank=True
+    )
+    copyright = models.CharField(
+        verbose_name="Авторские права",
+        max_length=255,
+        blank=True
+    )
+
+    class Meta:
+        verbose_name = 'Переменные сайта'
+        verbose_name_plural = 'Переменные сайта'
+        ordering = ['id']
