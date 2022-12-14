@@ -157,17 +157,8 @@
 					<h2>{{ count_reviews }}</h2>
 					<p>Отзывов о клиниках</p>
 				</div>
-				<div class="col-md-3 col-sm-6 fact">
-					<i class="flaticon-030-tooth"></i>
-					<h2>678</h2>
-					<p>Удаления</p>
-				</div>
-				<div class="col-md-3 col-sm-6 fact">
-					<i class="flaticon-023-tooth-1"></i>
-					<h2>2134</h2>
-					<p>Довольные клиенты</p>
-				</div>
-
+				{{ sitevars.0.site_stat_1 | safe }}
+				{{ sitevars.0.site_stat_2 | safe }}
 			</div>
 		</div>
 	</section>
@@ -220,7 +211,8 @@
 	<section class="testimonials-section spad">
 		<div class="container">
 			<div class="section-title text-center">
-				<h2>Отзывы клиентов:</h2>
+
+				{{ sitevars.0.review_slogan | safe }}
 			</div>
 		</div>
 

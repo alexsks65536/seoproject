@@ -34,7 +34,12 @@ class ServicesAdmin(admin.ModelAdmin):
 
 
 class SiteVarsAdmin(admin.ModelAdmin):
+    # list_display = ('id', 'logo', 'head_slogan', 'site_title')
     save_on_top = True
+
+    def get_html_photo(self, object):
+        if object.photo:
+            return mark_safe(f"<img src='{object.photo.url}' width=50>")
 
 
 admin.site.register(Company, CompanyAdmin)

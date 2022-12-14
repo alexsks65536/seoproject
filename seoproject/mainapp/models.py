@@ -158,9 +158,9 @@ class SiteVars(models.Model):
     """
     logo = models.ImageField(
         upload_to="clinics/images/",
-        verbose_name="Логотип"
+        verbose_name="Логотип заголовка"
     )
-    head_slogan = models.CharField(
+    head_slogan = models.TextField(
         verbose_name="Слоган сайта",
         max_length=255,
         blank=True
@@ -170,12 +170,27 @@ class SiteVars(models.Model):
         max_length=255,
         blank=True
     )
-    meta_tags = models.CharField(
+    meta_tags = models.TextField(
         verbose_name="Мета теги",
         max_length=255,
         blank=True
     )
-    footer_slogan = models.CharField(
+    site_stat_1 = models.TextField(
+        verbose_name="Поле статистики 1",
+        max_length=255,
+        blank=True
+    )
+    site_stat_2 = models.TextField(
+        verbose_name="Поле статистики 2",
+        max_length=255,
+        blank=True
+    )
+    review_slogan = models.TextField(
+        verbose_name="Слоган в отзывах",
+        max_length=255,
+        blank=True
+    )
+    footer_slogan = models.TextField(
         verbose_name="Слоган футера",
         max_length=255,
         blank=True
@@ -210,9 +225,14 @@ class SiteVars(models.Model):
         max_length=255,
         blank=True
     )
-    copyright = models.CharField(
+    copyright = models.TextField(
         verbose_name="Авторские права",
         max_length=255,
+        blank=True
+    )
+    logo_footer = models.ImageField(
+        upload_to="clinics/images/",
+        verbose_name="Логотип футера",
         blank=True
     )
 

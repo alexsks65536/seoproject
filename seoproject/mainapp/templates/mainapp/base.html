@@ -3,10 +3,10 @@
 <!DOCTYPE html>
 <html lang="zxx">
 <head>
-	<title>ProDent - Стоматологии Москвы</title>
+	<title>{{ sitevars.0.site_title }}</title>
 	<meta charset="UTF-8">
 	<meta name="description" content="Стоматологии Москвы">
-	<meta name="keywords" content="Стоматологии, коронки, виниры, зубной мост, лечение зубов">
+	<meta name="keywords" content="{{ sitevars.0.meta_tags }}">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<!-- Favicon -->   
 	<link href="{% static 'mainapp/img/favicon.ico' %}" rel="shortcut icon"/>
@@ -41,8 +41,7 @@
 		<div class="container">
 			<!-- Site Logo -->
 			<a href="{% url 'index' %}" class="site-logo">
-				<img src="{% static 'mainapp/img/logo.png' %}" alt="">
-<!--				<img src="{{ SiteVars.logo.url }}">-->
+				<img src="{{ sitevars.0.logo.url }}">
 			</a>
 			<!-- responsive -->
 			<div class="nav-switch">
@@ -54,12 +53,7 @@
 		</div>
 <hr>
 		<div class="header-slogan">
-			<h5>
-				Сайт-агрегатор стоматологических клиник Москвы, узнайте цены и отзывы о клиниках,
-				<i class="fa fa-phone" aria-hidden="true"></i> +7-495-495-00-00
-			</h5>
-			{#{{ sitevars.head_slogan | safe }}#}
-
+			{{ sitevars.0.head_slogan | safe }}
 		</div>
 
 		<div class="header-info">
@@ -165,17 +159,17 @@
 				<div class="col-lg-4">
 					<div class="footer-widget">
 						<div class="fw-about">
-							<img src="{% static 'mainapp/img/logo-light.png' %}" alt="">
-							<p>Рейтинг стоматологических клиник Москвы. <br>
-								Оставьте свой отзыв о работе клиник. <br>
-								По вопросу сотрудничества, обращайтесь по эл. почте</p>
+							<img src="{{ sitevars.0.logo_footer.url }}">
+							<p>
+								{{ sitevars.0.footer_slogan | safe}}
+							</p>
 							<div class="fw-social">
-								<a href=""><i class="fa fa-odnoklassniki"></i></a>
-								<a href=""><i class="fa fa-vk"></i></a>
-								<a href=""><i class="fa fa-twitter"></i></a>
-								<a href=""><i class="fa fa-instagram"></i></a>
-								<a href=""><i class="fa fa-facebook"></i></a>
-								<a href=""><i class="fa fa-linkedin"></i></a>
+								{{ sitevars.0.icon_1 | safe }}
+								{{ sitevars.0.icon_2 | safe }}
+								{{ sitevars.0.icon_3 | safe }}
+								{{ sitevars.0.icon_4 | safe }}
+								{{ sitevars.0.icon_5 | safe }}
+								{{ sitevars.0.icon_6 | safe }}
 							</div>
 						</div>
 					</div>
@@ -237,10 +231,11 @@
 	<footer class="footer-section">
 		<div class="container">
 			{% include 'mainapp/main_menu.html' %}
-			<div class="copyright">
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> Все права защищены <i class="fa fa-heart-o" aria-hidden="true"></i> by "A.B.B.A" </a>
-</div>
+					<div class="copyright">
+				{{ sitevars.0.copyright | safe}}
+					</div>
 		</div>
+
 	</footer>
 	<!-- Footer top section end -->
                                                 
