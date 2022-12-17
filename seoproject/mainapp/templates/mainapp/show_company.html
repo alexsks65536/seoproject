@@ -37,5 +37,27 @@
         </div>
 
 </div>
+    <!--			полоска раздела-->
+        <hr>
+<!--Вывод отзывов о компании-->
+<div class="separator"><h4>Отзывы о клинике: "{{ company.name }}"</h4></div>
+
+<div class="company_review">
+    {% for i in reviews %}
+        {% if i.Company.slug == company.slug %}
+            <br>
+            <div class="rat_star">
+                <!-- Отображение звездочек рейтинга клиник -->
+                {% include 'mainapp/review_stars.html' %}
+            </div>
+            <br>
+    <div class="">
+            <h6>{{ i.name }}</h6><span>{{ i.time_create }}</span>
+    </div>
+            <p>{{ i.description }}</p>
+            <hr>
+        {% endif %}
+    {% endfor %}
+</div>
 </div>
 {% endblock %}
