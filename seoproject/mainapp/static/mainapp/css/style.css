@@ -537,17 +537,23 @@ ol {
   margin-bottom: 0;
 }
 #navigation{
-	    height: 40px;
-	    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+	    height: 45px;
 	    font-size: 16px;
 	    line-height: 20px;
-	    top: 0px;
+	    padding: 5px 0 5px 0;
+	    margin: auto;
+	    /*margin: 0 40px 0 0;*/
+	    top: 0;
 	}
 #navigation.fixed{
 	    position: fixed;
+	    text-align: center;
+	    height: 60px;
 	    top: 0;
-	    width: 50%;
-	    background: #eee;
+	    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+	    /*padding-left: 10px;*/
+	    width: 100%;
+	    background: #FFF;
 	}
 /*------------------
   Hero section
