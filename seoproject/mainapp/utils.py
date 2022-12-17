@@ -21,7 +21,7 @@ class DataMixin:
         context['services'] = services
         context['sitevars'] = sitevars
         context['message'] = message
-        template = """<i class="fa fa-star" ></i>"""  # шаблон для рисования звезд рейтинга
+        template = """<i class="fa fa-star stars" ></i>"""  # шаблон для рисования звезд рейтинга
         t = Template(template)
         c = Context({})
         context['t'] = t.render(c)

@@ -536,7 +536,19 @@ ol {
   color: #8e8e8e;
   margin-bottom: 0;
 }
-
+#navigation{
+	    height: 40px;
+	    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.4);
+	    font-size: 16px;
+	    line-height: 20px;
+	    top: 0px;
+	}
+#navigation.fixed{
+	    position: fixed;
+	    top: 0;
+	    width: 50%;
+	    background: #eee;
+	}
 /*------------------
   Hero section
 ---------------------*/
@@ -673,7 +685,7 @@ ol {
 /*===============================================================*/
 /*======== CONTENT ==========*/
 
-.content {
+.content{
     display: flex; /*выставляем элементы горизонтально*/
     justify-content: space-evenly;
     width: 100%;
@@ -687,6 +699,7 @@ ol {
     color:#444;
     font-weight: 600;
 }
+
 .con_service {  /* выделение слов в тексте услуг: телефон, адрес*/
     text-align: left;
     color:#222;
@@ -695,6 +708,14 @@ ol {
 }
 .content img {
     width: 612px;
+    padding: 0px;
+    border-radius: 50px;  /* закругление углов картинок*/
+    border: 1px #ccc solid;
+    box-shadow: 0 0 1px #444;
+}
+.media img {
+    width: 612px;
+    margin: 20px;
     padding: 0px;
     border-radius: 50px;  /* закругление углов картинок*/
     border: 1px #ccc solid;
@@ -720,7 +741,7 @@ ol {
     border: 1px #ccc solid;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
-.content i {
+.content i, .stars {
     color: #ff6000; /* цвет звезд в рейтинге клиник */
 }
 .separator {
@@ -728,6 +749,16 @@ ol {
     justify-content: center; /*центрирование элементов*/
     padding: 7px;
     background-color: #EEE;
+}
+
+.content-logo {
+    display: flex;     /*выставляем элементы горизонтально*/
+    /*justify-content: space-evenly;*/
+    width: 100%;
+    align-items: center;
+    /*margin: 10px 0 10px 0;*/
+    padding-left: 400px;
+
 }
 /*========= RATING =============*/
 .rating {

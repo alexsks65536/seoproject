@@ -194,8 +194,25 @@ $(window).on('load', function() {
 				emptyFill: "rgba(0, 0, 0, 0)"
 			});
 		}
-
+            $(window).scroll(function(){
+	            if($(this).scrollTop()>140){
+	                $('#navigation').addClass('fixed');
+	            }
+	            else if ($(this).scrollTop()<140){
+	                $('#navigation').removeClass('fixed');
+	            }
+	        });
 	});
 
 })(jQuery);
 
+    jQuery(function($) {
+	        $(window).scroll(function(){
+	            if($(this).scrollTop()>140){
+	                $('#navigation').addClass('fixed');
+	            }
+	            else if ($(this).scrollTop()<140){
+	                $('#navigation').removeClass('fixed');
+	            }
+	        });
+	    });
