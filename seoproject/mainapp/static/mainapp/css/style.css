@@ -537,6 +537,7 @@ ol {
   margin-bottom: 0;
 }
 #navigation{
+        z-index: 999999;
 	    height: 45px;
 	    font-size: 16px;
 	    line-height: 20px;
@@ -546,6 +547,7 @@ ol {
 	    top: 0;
 	}
 #navigation.fixed{
+        z-index: 999999;
 	    position: fixed;
 	    text-align: center;
 	    height: 60px;
