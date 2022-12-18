@@ -68,16 +68,20 @@ class ShowCompany(DetailView, DataMixin):
         return dict(list(context.items()) + list(c_def.items()))  # объединение словарей для передачи контекста
 
 
-class AddReview(CreateView):  # Добавить отзыв
+class AddReview(CreateView, ListView, DataMixin):  # Добавить отзыв
+    model = Company
     form_class = AddReviewForm  # Указываем форму
     template_name = 'mainapp/add_review.html'
+    context_object_name = 'company'  # переменная контекста
     success_url = reverse_lazy('index')
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['title'] = 'Добавить отзыв'
+        context['thanks_for_review'] = 'Спасибо за ваш отзыв!'
         context['menu'] = menu
-        return context
+        c_def = self.get_user_context(title=context['company'])
+
+        return dict(list(context.items()) + list(c_def.items()))
 
     # def get(self, request, *args, **kwargs):
     #     form = AddReviewForm()
@@ -103,7 +107,19 @@ class AddReview(CreateView):  # Добавить отзыв
     #     })
 
 
-class FeedBackView(View):
+class FeedBackView(CreateView, ListView, DataMixin):
+    model = Company
+    form_class = FeedBackForm  # Указываем форму
+    template_name = 'mainapp/contact.html'
+    context_object_name = 'company'  # переменная контекста
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        c_def = self.get_user_context(title=context['company'])
+
+        return dict(list(context.items()) + list(c_def.items()))
+
     def get(self, request, *args, **kwargs):
         form = FeedBackForm()
         return render(request, 'mainapp/contact.html', context={
@@ -112,6 +128,9 @@ class FeedBackView(View):
         })
 
     def post(self, request, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['menu'] = menu
+        c_def = self.get_user_context(title=context['company'])
         form = FeedBackForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
@@ -125,6 +144,8 @@ class FeedBackView(View):
             return HttpResponseRedirect('success')
         return render(request, 'mainapp/contact.html', context={
             'form': form,
+            'menu': menu,
+            'c_def': c_def,
         })
 
 

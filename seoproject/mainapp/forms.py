@@ -34,6 +34,7 @@ class AddReviewForm(forms.ModelForm):
 
 
 class FeedBackForm(forms.Form):
+
     name = forms.CharField(
         max_length=100,
         widget=forms.TextInput(attrs={
