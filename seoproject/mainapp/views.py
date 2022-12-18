@@ -69,7 +69,7 @@ class ShowCompany(DetailView, DataMixin):
 
 
 class AddReview(CreateView):  # Добавить отзыв
-    form_class = ContactForm  # Указываем форму
+    form_class = AddReviewForm  # Указываем форму
     template_name = 'mainapp/add_review.html'
     success_url = reverse_lazy('index')
 
@@ -79,37 +79,28 @@ class AddReview(CreateView):  # Добавить отзыв
         context['menu'] = menu
         return context
 
-
-class Contact(ListView):
-    model = Company
-    template_name = 'mainapp/contact.html'  # указываем путь к шаблону
-    context_object_name = 'company'  # переменная контекста
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['menu'] = menu
-        return context
-
-    def form_valid(self, form):
-        print(form.cleaned_data)
-        return redirect('index')
-
-
-class LoginUser(LoginView):
-    form_class = AuthenticationForm
-    template_name = 'mainapp/login.html'
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        return context
-
-    def get_success_url(self):
-        return reverse_lazy('index')
-
-
-def logout_user(request):
-    logout(request)
-    return redirect('login')
+    # def get(self, request, *args, **kwargs):
+    #     form = AddReviewForm()
+    #     return render(request, 'mainapp/add_review.html', context={
+    #         'form': form,
+    #         'title': 'Отзыв о клинике'
+    #     })
+    #
+    # def post(self, request, *args, **kwargs):
+    #     form = AddReviewForm(request.POST)
+    #     if form.is_valid():
+    #         name = form.cleaned_data['name']
+    #         from_email = form.cleaned_data['email']
+    #         company = form.cleaned_data['Company']
+    #         message = form.cleaned_data['description']
+    #         try:
+    #             send_mail(f'От {name} | {from_email} | {company}', message, from_email, [os.getenv('EMAIL_HOST_USER')])
+    #         except BadHeaderError:
+    #             return HttpResponse('Невалидный заголовок')
+    #         return HttpResponseRedirect('success')
+    #     return render(request, 'mainapp/add_review.html', context={
+    #         'form': form,
+    #     })
 
 
 class FeedBackView(View):
@@ -142,3 +133,20 @@ class SuccessView(View):
         return render(request, 'mainapp/success.html', context={
             'title': 'Спасибо'
         })
+
+
+class LoginUser(LoginView):
+    form_class = AuthenticationForm
+    template_name = 'mainapp/login.html'
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
+
+    def get_success_url(self):
+        return reverse_lazy('index')
+
+
+def logout_user(request):
+    logout(request)
+    return redirect('login')

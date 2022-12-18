@@ -5,7 +5,7 @@ from captcha.fields import CaptchaField
 from .models import *
 
 
-class ContactForm(forms.ModelForm):
+class AddReviewForm(forms.ModelForm):
     captcha = CaptchaField()
 
     def __init__(self, *args, **kwargs):
