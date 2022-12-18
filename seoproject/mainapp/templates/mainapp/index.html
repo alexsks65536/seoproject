@@ -13,13 +13,14 @@
 			  </div>
 			</div>
 			<div class="col">
+				<h6>Клиник на сайте: {{ count_company }}</h6>
 			</div>
 			<div class="col">
+				<h6>Отзывов на сайте: {{ count_reviews }}</h6>
 			</div>
 		</div>
 	</div>
 	<section>
-		<p>......{{ thanks_for_review }}</p>
 		{% for clinic in company %}
 					<article id="{{ clinic.slug }}"></article>  <!--Якорь-->
         <div class="content">

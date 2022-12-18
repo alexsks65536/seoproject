@@ -127,16 +127,16 @@
 					<p>Узнайте о последних новостях в области стоматологии московских клиник.</p>
 				</div>
 				<div class="col-lg-5 text-lg-right">
-					<form class="newsletter-form">
+					<form class="newsletter-form" method="" action="">
+						{% csrf_token %}
 						<input type="text" placeholder="введите E-mail">
-						<button class="site-btn sb-dark">Подписаться</button>
+						<button class="site-btn sb-dark" type="submit">Подписаться</button>
 					</form>
 				</div>
 			</div>
 		</div>
 	</section>
 	<!-- Newsletter section end -->
-
 
 
 	<!-- Footer top section -->
