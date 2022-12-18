@@ -23,6 +23,8 @@ menu = [{'title': 'Главная', 'url_name': 'index'},
         {'title': 'Оставить отзыв', 'url_name': 'add_review'},
         {'title': 'Связаться с нами', 'url_name': 'contact'}
         ]
+sitevars = SiteVars.objects.all()
+services = Services.objects.all()
 
 
 class Index(ListView, DataMixin):
@@ -69,68 +71,55 @@ class ShowCompany(DetailView, DataMixin):
 
 
 class AddReview(CreateView, ListView, DataMixin):  # Добавить отзыв
-    model = Company
-    form_class = AddReviewForm  # Указываем форму
-    template_name = 'mainapp/add_review.html'
-    context_object_name = 'company'  # переменная контекста
-    success_url = reverse_lazy('index')
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['thanks_for_review'] = 'Спасибо за ваш отзыв!'
-        context['menu'] = menu
-        c_def = self.get_user_context(title=context['company'])
+    class Meta:
+        model = Reviews
+        fields = ['name', 'from_email', 'company', 'message', 'stars']
 
-        return dict(list(context.items()) + list(c_def.items()))
+    def get(self, request, *args, **kwargs):
+        form = AddReviewForm()
+        return render(request, 'mainapp/add_review.html', context={
+            'form': form,
+            'title': 'Отзыв о клинике',
+            'menu': menu,
+            'sitevars': sitevars,
+            'services': services,
+        })
 
-    # def get(self, request, *args, **kwargs):
-    #     form = AddReviewForm()
-    #     return render(request, 'mainapp/add_review.html', context={
-    #         'form': form,
-    #         'title': 'Отзыв о клинике'
-    #     })
-    #
-    # def post(self, request, *args, **kwargs):
-    #     form = AddReviewForm(request.POST)
-    #     if form.is_valid():
-    #         name = form.cleaned_data['name']
-    #         from_email = form.cleaned_data['email']
-    #         company = form.cleaned_data['Company']
-    #         message = form.cleaned_data['description']
-    #         try:
-    #             send_mail(f'От {name} | {from_email} | {company}', message, from_email, [os.getenv('EMAIL_HOST_USER')])
-    #         except BadHeaderError:
-    #             return HttpResponse('Невалидный заголовок')
-    #         return HttpResponseRedirect('success')
-    #     return render(request, 'mainapp/add_review.html', context={
-    #         'form': form,
-    #     })
+    def post(self, request, *args, **kwargs):
+        form = AddReviewForm(request.POST)
+        if form.is_valid():
+            name = form.cleaned_data['name']
+            email = form.cleaned_data['email']
+            company = form.cleaned_data['Company']
+            description = form.cleaned_data['description']
+            stars = form.cleaned_data['stars']
+
+            Reviews.objects.create(name=name, email=email, Company=company, description=description, stars=stars)
+
+            try:
+                send_mail(f'От {name} | {email} | {company}', description, email, [os.getenv('EMAIL_HOST_USER')])
+            except BadHeaderError:
+                return HttpResponse('Невалидный заголовок')
+            return HttpResponseRedirect('success')
+        return render(request, 'mainapp/add_review.html', context={
+            'form': form,
+        })
 
 
-class FeedBackView(CreateView, ListView, DataMixin):
-    model = Company
-    form_class = FeedBackForm  # Указываем форму
-    template_name = 'mainapp/contact.html'
-    context_object_name = 'company'  # переменная контекста
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['menu'] = menu
-        c_def = self.get_user_context(title=context['company'])
-
-        return dict(list(context.items()) + list(c_def.items()))
+class FeedBackView(View):
 
     def get(self, request, *args, **kwargs):
         form = FeedBackForm()
         return render(request, 'mainapp/contact.html', context={
             'form': form,
-            'title': 'Написать мне'
+            'title': 'Написать мне',
+            'menu': menu,
+            'sitevars': sitevars,
+            'services': services,
         })
 
     def post(self, request, *args, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['menu'] = menu
-        c_def = self.get_user_context(title=context['company'])
         form = FeedBackForm(request.POST)
         if form.is_valid():
             name = form.cleaned_data['name']
@@ -144,15 +133,16 @@ class FeedBackView(CreateView, ListView, DataMixin):
             return HttpResponseRedirect('success')
         return render(request, 'mainapp/contact.html', context={
             'form': form,
-            'menu': menu,
-            'c_def': c_def,
         })
 
 
 class SuccessView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'mainapp/success.html', context={
-            'title': 'Спасибо'
+            'title': 'Спасибо',
+            'menu': menu,
+            'sitevars': sitevars,
+            'services': services,
         })
 
 
