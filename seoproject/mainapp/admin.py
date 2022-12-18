@@ -18,7 +18,7 @@ class CompanyAdmin(admin.ModelAdmin):
 
 
 class ReviewsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'email', 'description', 'Company', 'time_create', 'is_published')
+    list_display = ('id', 'name', 'email', 'Company', 'time_create', 'is_published')
     list_display_links = ('id', 'name')
     list_filter = ('name', 'Company', 'stars', 'is_published')
     search_fields = ('name', 'Company', 'is_published')
