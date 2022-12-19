@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Reviews, Company, Services, SiteVars
+from .models import Reviews, Company, Services, SiteVars, TopBanner, Timetable
 
 
 class CompanyAdmin(admin.ModelAdmin):
@@ -42,7 +42,23 @@ class SiteVarsAdmin(admin.ModelAdmin):
             return mark_safe(f"<img src='{object.photo.url}' width=50>")
 
 
+class TopBannerAdmin(admin.ModelAdmin):
+    list_display = ('id', 'get_html_photo', 'textup', 'textdown')
+    save_on_top = True
+
+    def get_html_photo(self, object):
+        if object.iconbanner:
+            return mark_safe(f"<img src='{object.iconbanner.url}' width=30>")
+
+
+class TimetableAdmin(admin.ModelAdmin):
+    list_display = ('id', 'day_week', 'time_work')
+    save_on_top = True
+
+
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Reviews, ReviewsAdmin)
 admin.site.register(Services, ServicesAdmin)
 admin.site.register(SiteVars, SiteVarsAdmin)
+admin.site.register(TopBanner, TopBannerAdmin)
+admin.site.register(Timetable, TimetableAdmin)

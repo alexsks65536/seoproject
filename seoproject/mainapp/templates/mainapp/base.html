@@ -59,45 +59,19 @@
 		</div>
 
 		<div class="header-info">
-
 			<div class="container">
 				<div class="row">
+					{% for top in topbanner %}
 					<div class="col-lg-3 col-md-6 hi-item">
 						<div class="hs-icon">
-							<img src="{% static 'mainapp/img/icons/map-marker.png' %}" alt="">
+							<img src="{{ top.iconbanner.url }}" alt="">
 						</div>
 						<div class="hi-content">
-							<h6>Клиники Москвы</h6>
-							<p>Стоматология</p>
+							<h6>{{ top.textup }}</h6>
+							<p>{{ top.textdown }}</p>
 						</div>
 					</div>
-					<div class="col-lg-3 col-md-6 hi-item">
-						<div class="hs-icon">
-							<img src="{% static 'mainapp/img/icons/clock.png' %}" alt="">
-						</div>
-						<div class="hi-content">
-							<h6>Отзывы клиентов</h6>
-							<p>описания</p>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 hi-item">
-						<div class="hs-icon">
-							<img src="{% static 'mainapp/img/icons/phone.png' %}" alt="">
-						</div>
-						<div class="hi-content">
-							<h6>Напишите отзыв</h6>
-							<p>Оставьте отзыв</p>
-						</div>
-					</div>
-					<div class="col-lg-3 col-md-6 hi-item">
-						<div class="hs-icon">
-							<img src="{% static 'mainapp/img/icons/calendar.png' %}" alt="">
-						</div>
-						<div class="hi-content">
-							<h6>Узнайте стоимость</h6>
-							<p>Стоматологии Москвы</p>
-						</div>
-					</div>
+					{% endfor %}
 				</div>
 			</div>
 		</div>
@@ -179,30 +153,12 @@
 							<div class="fw-title"><i class="fa fa-clock-o"></i>&nbsp;&nbsp;&nbsp;&nbsp;Время работы</div>
 							<div class="timetable-content">
 								<table>
+									{% for time in timetable %}
 									<tr>
-										<td>Понедельник</td>
-										<td>8:00am - 12:00pm</td>
+										<td>{{ time.day_week }}</td>
+										<td>{{ time.time_work }}</td>
 									</tr>
-									<tr>
-										<td>Вторник</td>
-										<td>8:00am - 12:00pm</td>
-									</tr>
-									<tr>
-										<td>Среда</td>
-										<td>8:00am - 12:00pm</td>
-									</tr>
-									<tr>
-										<td>Четверг</td>
-										<td>8:00am - 12:00pm</td>
-									</tr>
-									<tr>
-										<td>Пятница</td>
-										<td>8:00am - 12:00pm</td>
-									</tr>
-									<tr>
-										<td>Суббота</td>
-										<td>8:00am - 12:00pm</td>
-									</tr>
+									{% endfor %}
 								</table>
 							</div>
 						</div>

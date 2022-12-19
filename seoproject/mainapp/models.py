@@ -240,3 +240,46 @@ class SiteVars(models.Model):
         verbose_name = 'Переменные сайта'
         verbose_name_plural = 'Переменные сайта'
         ordering = ['id']
+
+
+class TopBanner(models.Model):
+    iconbanner = models.ImageField(
+        upload_to="topbanner/",
+        verbose_name="Иконка банера",
+        blank=True
+    )
+    textup = models.TextField(
+        verbose_name="Текст вверху",
+        max_length=128,
+        blank=True
+    )
+    textdown = models.TextField(
+        verbose_name="Текст внизу",
+        max_length=128,
+        blank=True
+    )
+
+    class Meta:
+        verbose_name = 'Верхний баннер'
+        verbose_name_plural = 'Верхний баннер'
+        ordering = ['id']
+
+
+class Timetable(models.Model):
+    day_week = models.CharField(
+        verbose_name='День недели',
+        max_length=16,
+        blank=True
+    )
+    time_work = models.CharField(
+        verbose_name='Время работы',
+        max_length=128,
+        blank=True
+    )
+
+    class Meta:
+        verbose_name = 'Расписание'
+        verbose_name_plural = 'Расписание'
+        ordering = ['id']
+
+
