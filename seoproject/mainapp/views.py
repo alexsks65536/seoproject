@@ -3,15 +3,16 @@ import os
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
+from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
-from django.template import Template, Context
-from .forms import FeedBackForm
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.mail import send_mail, BadHeaderError
 from django.shortcuts import render, get_object_or_404
 from django.views import View
+from django.views.generic.list import MultipleObjectMixin
+
 from .forms import *
 from .models import *
 from .utils import DataMixin
@@ -53,17 +54,15 @@ class Index(ListView, DataMixin):
         return Company.objects.filter(is_published=True)
 
 
-class ShowCompany(DetailView, DataMixin):
+class ShowCompany(DetailView, MultipleObjectMixin, DataMixin):
     model = Company
     template_name = 'mainapp/show_company.html'  # указываем путь к шаблону
-    context_object_name = 'company'  # переменная контекста
+    paginate_by = 5
     slug_url_kwarg = 'company_slug'
 
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        company_all = Company.objects.all()
-        count_company = len(company_all)  # кол-во клиник
-        context['count_company'] = count_company
+    def get_context_data(self, **kwargs):
+        object_list = Company.objects.filter(name=self.object)
+        context = super(ShowCompany, self).get_context_data(object_list=object_list, **kwargs)
         context['menu'] = menu
         c_def = self.get_user_context(title=context['company'])
 

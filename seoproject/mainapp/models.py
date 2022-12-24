@@ -74,6 +74,14 @@ class Reviews(models.Model):
     """
     Отзывы клиентов
     """
+
+    class Stars(models.IntegerChoices):
+        ОТЛИЧНО = 5
+        ХОРОШО = 4
+        УДОВЛЕТВОРИТЕЛЬНО = 3
+        ПЛОХО = 2
+        ОТРИЦАТЕЛЬНО = 1
+
     name = models.CharField(
         verbose_name="ФИО",
         max_length=64,
@@ -89,10 +97,10 @@ class Reviews(models.Model):
         related_name="+",
         on_delete=models.CASCADE
     )
-    stars = models.PositiveIntegerField(
+
+    stars = models.IntegerField(
         default=5,
-        validators=[MinValueValidator(1),
-                    MaxValueValidator(5)],
+        choices=Stars.choices,
         verbose_name="Кол-во звезд от 1-5",
         blank=False
     )
