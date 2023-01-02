@@ -19,7 +19,8 @@ class Company(models.Model):
     )
     description = models.TextField(
         verbose_name="описание",
-        blank=True)
+        blank=True
+    )
     services = models.TextField(
         blank=True,
         verbose_name="Оказываемые услуги"
@@ -97,7 +98,6 @@ class Reviews(models.Model):
         related_name="+",
         on_delete=models.CASCADE
     )
-
     stars = models.IntegerField(
         default=5,
         choices=Stars.choices,
@@ -282,7 +282,7 @@ class Timetable(models.Model):
     time_work = models.CharField(
         verbose_name='Время работы',
         max_length=128,
-        blank=True
+    blank=True
     )
 
     class Meta:
@@ -290,4 +290,27 @@ class Timetable(models.Model):
         verbose_name_plural = 'Расписание'
         ordering = ['id']
 
+
+class CompanyPhoto(models.Model):
+    photoset = models.ImageField(
+        upload_to="clinics/images/",
+        verbose_name="Фото"
+    )
+    description = models.TextField(
+        verbose_name="описание",
+        blank=True
+    )
+    is_published = models.BooleanField(
+        default=True, verbose_name="Опубликовано"
+    )
+    Company = models.ForeignKey(
+        "Company",
+        related_name="+",
+        on_delete=models.CASCADE
+    )
+
+    class Meta:
+        verbose_name = 'Фото компании'
+        verbose_name_plural = 'Фото компаний'
+        ordering = ['id']
 

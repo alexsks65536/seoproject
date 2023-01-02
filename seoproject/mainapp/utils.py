@@ -17,6 +17,7 @@ class DataMixin:
         sitevars = SiteVars.objects.all()  # Переменные сайта
         topbanner = TopBanner.objects.all()  # Верхний баннер
         timetable = Timetable.objects.all()  # Распорядок работы
+        companyphoto = CompanyPhoto.objects.all()  # Фото компаний
         count_reviews = len(reviews)  # кол-во отзывов в общем
         context['count_reviews'] = count_reviews
         context['reviews'] = reviews
@@ -24,6 +25,7 @@ class DataMixin:
         context['sitevars'] = sitevars
         context['topbanner'] = topbanner
         context['timetable'] = timetable
+        context['companyphoto'] = companyphoto
         context['message'] = message
         template = """<i class="fa fa-star stars" ></i>"""  # шаблон для рисования звезд рейтинга
         t = Template(template)

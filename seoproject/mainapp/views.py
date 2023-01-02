@@ -1,4 +1,5 @@
 import os
+import random
 
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
@@ -61,7 +62,7 @@ class ShowCompany(DetailView, MultipleObjectMixin, DataMixin):
     slug_url_kwarg = 'company_slug'
 
     def get_context_data(self, **kwargs):
-        object_list = Company.objects.filter(name=self.object)
+        object_list = Reviews.objects.filter(name=self.object)
         context = super(ShowCompany, self).get_context_data(object_list=object_list, **kwargs)
         context['menu'] = menu
         c_def = self.get_user_context(title=context['company'])

@@ -729,6 +729,104 @@ ol {
     border: 1px #ccc solid;
     box-shadow: 0 0 1px #444;
 }
+.show {
+    display: flex;
+    width: 80%;
+    margin: 0 auto;
+}
+.show_parent {
+    justify-content: space-evenly;
+}
+.show_photo {
+    position: relative;
+    margin: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 5px;
+}
+.show_text {
+    margin:10px;
+}
+/* Модальное изображение */
+/* Стиль изображения, используемого для запуска модального */
+#myImg {
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+#myImg:hover {opacity: 0.7;}
+
+/* Модальный (фон) */
+.modal {
+  display: none; /* Скрыто по умолчанию */
+  position: fixed; /* Оставаться на месте */
+  z-index: 1; /* Сидеть на вершине */
+  padding-top: 100px; /* Расположение коробки */
+  left: 0;
+  top: 0;
+  width: 100%; /* Полная ширина */
+  height: 100%; /* Полный высота */
+  overflow: auto; /* Включите прокрутку, если это необходимо */
+  background-color: rgb(0,0,0); /* Цвет запасной вариант */
+  background-color: rgba(0,0,0,0.9); /* Черный с непрозрачностью */
+}
+
+/* Модальное содержание (изображение) */
+.modal-content {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+}
+
+/* Заголовок модального изображения ( текст изображения) - та же ширина, что и изображение */
+#caption {
+  margin: auto;
+  display: block;
+  width: 80%;
+  max-width: 700px;
+  text-align: center;
+  color: #ccc;
+  padding: 10px 0;
+  height: 150px;
+}
+
+/* Добавить анимацию - включение модели */
+.modal-content, #caption {
+  animation-name: zoom;
+  animation-duration: 0.6s;
+}
+
+@keyframes zoom {
+  from {transform:scale(0)}
+  to {transform:scale(1)}
+}
+
+/* Кнопка закрытия */
+.close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f1f1;
+  font-size: 40px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.close:hover,
+.close:focus {
+  color: #bbb;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+/* 100% Ширина изображения на меньших экранах */
+@media only screen and (max-width: 700px){
+  .modal-content {
+    width: 100%;
+  }
+}
+/* end Модальное изображение */
 .con_left {
     width: auto;
     margin: 10px;
@@ -777,6 +875,7 @@ ol {
     border: 1px #ccc solid;
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
+
 /*========= RATING =============*/
 .rating {
     display: flex; /*выставляем элементы горизонтально*/
