@@ -1,10 +1,10 @@
 import os
-import random
+from itertools import chain
 
 from django.contrib.auth import logout
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.views import LoginView
-from django.core.paginator import Paginator
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView
@@ -21,10 +21,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-menu = [{'title': 'Главная', 'url_name': 'index'},
-        {'title': 'Оставить отзыв', 'url_name': 'add_review'},
-        {'title': 'Связаться с нами', 'url_name': 'contact'}
-        ]
 sitevars = SiteVars.objects.all()
 services = Services.objects.all()
 
@@ -40,7 +36,6 @@ class Index(ListView, DataMixin):
         company_all = Company.objects.all()
         count_company = len(company_all)  # кол-во клиник
         context['count_company'] = count_company
-        context['menu'] = menu
         c_def = self.get_user_context(title=context['company'])
 
         return dict(list(context.items()) + list(c_def.items()))  # объединение словарей для передачи контекста
@@ -64,7 +59,6 @@ class ShowCompany(DetailView, MultipleObjectMixin, DataMixin):
     def get_context_data(self, **kwargs):
         object_list = Reviews.objects.filter(name=self.object)
         context = super(ShowCompany, self).get_context_data(object_list=object_list, **kwargs)
-        context['menu'] = menu
         c_def = self.get_user_context(title=context['company'])
 
         return dict(list(context.items()) + list(c_def.items()))  # объединение словарей для передачи контекста
@@ -81,7 +75,6 @@ class AddReview(CreateView, ListView, DataMixin):  # Добавить отзыв
         return render(request, 'mainapp/add_review.html', context={
             'form': form,
             'title': 'Отзыв о клинике',
-            'menu': menu,
             'sitevars': sitevars,
             'services': services,
         })
@@ -114,7 +107,6 @@ class FeedBackView(View):
         return render(request, 'mainapp/contact.html', context={
             'form': form,
             'title': 'Написать мне',
-            'menu': menu,
             'sitevars': sitevars,
             'services': services,
         })
@@ -140,7 +132,6 @@ class SuccessView(View):
     def get(self, request, *args, **kwargs):
         return render(request, 'mainapp/success.html', context={
             'title': 'Спасибо',
-            'menu': menu,
             'sitevars': sitevars,
             'services': services,
         })
@@ -161,3 +152,37 @@ class LoginUser(LoginView):
 def logout_user(request):
     logout(request)
     return redirect('login')
+
+
+class SearchView(ListView, DataMixin):
+    paginate_by = 10
+    template_name = 'mainapp/search.html'  # указываем путь к шаблону
+
+    def get(self, request, *args, **kwargs):
+        context = {}
+        q = request.GET.get('q')
+        if q:
+            query_sets = []  # Total QuerySet
+
+            # Searching for all models
+            query_sets.append(Company.objects.search(query=q))
+            # query_sets.append(Reviews.objects.search(query=q))
+            # query_sets.append(Services.objects.search(query=q))
+
+            # and combine results
+            final_set = list(chain(*query_sets))
+            final_set.sort(key=lambda x: x.time_create, reverse=True)  # Sorting
+
+            context['last_question'] = '?q=%s' % q
+
+            current_page = Paginator(final_set, 10)
+
+            page = request.GET.get('page')
+            try:
+                context['object_list'] = current_page.page(page)
+            except PageNotAnInteger:
+                context['object_list'] = current_page.page(1)
+            except EmptyPage:
+                context['object_list'] = current_page.page(current_page.num_pages)
+
+        return render(request=request, template_name=self.template_name, context=context)

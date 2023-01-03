@@ -747,6 +747,11 @@ ol {
 .show_text {
     margin:10px;
 }
+.show_search {
+    position: relative;
+    margin: 10px;
+
+}
 /* Модальное изображение */
 /* Стиль изображения, используемого для запуска модального */
 #myImg {
@@ -790,7 +795,6 @@ ol {
   padding: 10px 0;
   height: 150px;
 }
-
 /* Добавить анимацию - включение модели */
 .modal-content, #caption {
   animation-name: zoom;

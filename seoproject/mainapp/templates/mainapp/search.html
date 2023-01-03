@@ -1,0 +1,31 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    {% block page %}
+    <h3>Поиск</h3>
+    <hr>
+    <br>
+    {% if object_list %}
+        {% for object in object_list %}
+            <div>
+                <a href="{{ object.get_absolute_url }}">
+                    <h5>{{ object.name }}</h5>
+                </a>
+                <p>
+                    <a class="btn btn-default btn-sm"
+                       href="{{ object.get_absolute_url }}">Читать далее
+                    </a>
+                </p>
+            </div>
+        {% endfor %}
+    {% include 'mainapp/paginator.html' %}
+    {% else %}
+        <h6>Не найдены клиники по вашему запросу</h6>
+            <br>
+        <p>Попробуйте повторить запрос с другой формулировкой</p>
+    {% endif %}
+    {% endblock %}
+</div>
+{% endblock %}

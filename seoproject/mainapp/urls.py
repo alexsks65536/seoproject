@@ -11,4 +11,5 @@ urlpatterns = [
     path('show_company/<slug:company_slug>/', ShowCompany.as_view(), name='show_company'),
     path('contact/', FeedBackView.as_view(), name='contact'),
     path('contact/success/', SuccessView.as_view(), name='success'),
+    path('search/', SearchView.as_view(), name='search'),
 ]
