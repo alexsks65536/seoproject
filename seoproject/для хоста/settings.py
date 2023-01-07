@@ -23,9 +23,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['seoprovi.beget.tech', 'www.seoprovi.beget.tech']
 
 
 # Application definition
@@ -98,8 +98,14 @@ WSGI_APPLICATION = 'seoproject.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        # 'ENGINE': 'django.db.backends.sqlite3',
+        # 'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'seoprovi_admin',
+        'USER': 'seoprovi_admin',
+        'PASSWORD': 'fIaYpl55',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 
@@ -158,7 +164,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # LOGIN_REDIRECT_URL = '/'
 
 INTERNAL_IPS = [
-    "127.0.0.1",
+    "seoprovi.beget.tech",
 ]
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

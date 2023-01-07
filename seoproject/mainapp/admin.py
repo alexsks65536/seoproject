@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
 
-from .models import Reviews, Company, Services, SiteVars, TopBanner, Timetable, CompanyPhoto
+from .models import Reviews, Company, Services, SiteVars, TopBanner, Timetable, CompanyPhoto, Price
 
 
 class CompanyAdmin(admin.ModelAdmin):
@@ -26,10 +26,18 @@ class ReviewsAdmin(admin.ModelAdmin):
 
 
 class ServicesAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name', 'description', 'icon')
+    list_display = ('id', 'name', 'description', 'icon', 'is_published')
     list_display_links = ('id', 'name')
     list_filter = ('name',)
     search_fields = ('name',)
+    save_on_top = True
+
+
+class PriceAdmin(admin.ModelAdmin):
+    list_display = ('id', 'Service', 'price_min', 'price_max', 'Company', 'time_create', 'is_published')
+    list_display_links = ('id', 'Service', 'Company')
+    list_filter = ('Service', 'Company')
+    search_fields = ('Service', 'Company')
     save_on_top = True
 
 
@@ -70,6 +78,7 @@ class CompanyPhotoAdmin(admin.ModelAdmin):
 admin.site.register(Company, CompanyAdmin)
 admin.site.register(Reviews, ReviewsAdmin)
 admin.site.register(Services, ServicesAdmin)
+admin.site.register(Price, PriceAdmin)
 admin.site.register(SiteVars, SiteVarsAdmin)
 admin.site.register(TopBanner, TopBannerAdmin)
 admin.site.register(Timetable, TimetableAdmin)

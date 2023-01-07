@@ -12,7 +12,7 @@
 					<input id="search" name="q" type="text" class="form-control" placeholder="Найти">
 					</div>
 					<div class="p-2 bd-highlight">
-					<button class="btn btn-success" type="submit">
+					<button class="btn btn-primary" type="submit">
 						<i class="fas fa-search"></i>
 					</button>
 					</div>
@@ -26,9 +26,12 @@
 			<div class="col">
 				<h6>Отзывов на сайте: {{ count_reviews }}</h6>
 			</div>
+<!--			<div class="col">-->
+<!--				-->
+<!--			</div>-->
 		</div>
 	</div>
-	<section>
+	<section class="services-section spad">
 		{% for clinic in company %}
 					<article id="{{ clinic.slug }}"></article>  <!--Якорь-->
         <div class="content">
@@ -61,7 +64,7 @@
 
 <!--			поле вывода телефона, адреса, цены, услуг-->
             <div class="con_right">
-                <p class="con_service">Цены: от 500 р.</p>
+                <p class="con_service">Цены на услуги:</p>
                 <p>
 					<a href="{{ clinic.get_absolute_url }}">
 					<button type="button" class="btn btn-primary">Подробнее</button>
@@ -91,7 +94,7 @@
 	<a name="ratings"></a>
 	<!--Таблица рейтингов-->
 <h3 align="center"> Рейтинги клиник: </h3>
-	<section class="">
+	<section>
         <div class="rating">
             <table class="tab_rating">
                 <thead align="center">
@@ -131,7 +134,6 @@
 						{% endfor %}
             </table>
         </div>
-
 	</section>
 	<!--конец таблицы рейтингов-->
 {% endblock rating %}
@@ -169,6 +171,7 @@
 			</div>
 			<div class="row">
 				{% for s in services %}
+				{% if s.is_published %}
 				<div class="col-lg-4 col-md-6 service">
 					<div class="service-icon">
 						{{ s.icon | safe }}
@@ -178,6 +181,7 @@
 						<p>{{ s.description }}</p>
 					</div>
 				</div>
+				{% endif %}
 				{% endfor %}
 			</div>
 		</div>
@@ -218,7 +222,7 @@
 					<div class="ts-content">
 						<div class="quta">“</div>
 						<p>{{ i.description }}</p>
-						<h6>{{ i.name|title }}</h6>
+						<h6>{{ i.name | title }}</h6>
 						<a href="#{{ i.Company.slug }}">
 							<span>{{ i.Company }}</span>
 						</a>

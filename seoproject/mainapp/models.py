@@ -19,23 +19,35 @@ class CompanyManager(models.Manager):
         return qs
 
 
+class ServiceManager(models.Manager):
+    use_for_related_fields = True
+
+    def search(self, query=None):
+        qs = self.get_queryset()
+        if query:
+            or_lookup = (Q(name__iregex=query))
+            qs = qs.filter(or_lookup)
+
+        return qs
+
+
 class Company(models.Model):
     """
     Описание клиник
     """
     name = models.CharField(
-        verbose_name="Наименование компании",
+        verbose_name="Наименование клиники",
         max_length=64,
         unique=True,
         blank=True
     )
     description = models.TextField(
-        verbose_name="описание",
+        verbose_name="Описание",
         blank=True
     )
     services = models.TextField(
         blank=True,
-        verbose_name="Оказываемые услуги"
+        verbose_name="Подробности"
     )
     rating = models.PositiveIntegerField(
         verbose_name="Цифра рейтинга",
@@ -48,8 +60,8 @@ class Company(models.Model):
         blank=True
     )
     photo = models.ImageField(
-        upload_to="clinics/images/",
-        verbose_name="Фото"
+        verbose_name="Фото",
+        upload_to="clinics/images/"
     )
     slug = models.SlugField(
         max_length=255,
@@ -58,11 +70,12 @@ class Company(models.Model):
         verbose_name="URL"
     )
     time_create = models.DateField(
-        auto_now_add=True,
-        verbose_name="Время создания"
+        verbose_name="Время создания",
+        auto_now_add=True
     )
     is_published = models.BooleanField(
-        default=True, verbose_name="Опубликовано"
+        verbose_name="Опубликовано",
+        default=True
     )
     tag = TaggableManager()
 
@@ -89,7 +102,6 @@ class Reviews(models.Model):
     """
     Отзывы клиентов
     """
-
     class Stars(models.IntegerChoices):
         ОТЛИЧНО = 5
         ХОРОШО = 4
@@ -123,11 +135,12 @@ class Reviews(models.Model):
         verbose_name="Электронная почта"
     )
     time_create = models.DateField(
-        auto_now_add=True,
-        verbose_name="Время создания"
+        verbose_name="Время создания",
+        auto_now_add=True
     )
     is_published = models.BooleanField(
-        default=False, verbose_name="Опубликовано"
+        verbose_name="Опубликовано",
+        default=True,
     )
 
     def get_absolute_url(self):
@@ -161,6 +174,10 @@ class Services(models.Model):
         max_length=255,
         blank=True
     )
+    is_published = models.BooleanField(
+        verbose_name="Опубликовано",
+        default=False,
+    )
 
     def get_absolute_url(self):
         return reverse('index')
@@ -168,6 +185,75 @@ class Services(models.Model):
     class Meta:
         verbose_name = 'Услуга'
         verbose_name_plural = 'Услуги'
+        ordering = ['id', 'name']
+
+    def __str__(self):
+        return self.name
+
+    objects = ServiceManager()
+
+
+class Price(models.Model):
+    """
+    Цены на услуги, описание
+    """
+    class Unit(models.TextChoices):
+        нет = ''
+        за_зуб = 'за зуб'
+        за_ед = 'за ед.'
+        за_шт = 'за шт.'
+        за_1_снимок = 'за 1 снимок'
+
+    name = models.CharField(
+        verbose_name="Услуга",
+        max_length=255,
+        unique=False,
+        blank=True
+    )
+    price_min = models.PositiveIntegerField(
+        null=True,
+        verbose_name="Цена, от",
+        blank=True
+    )
+    price_max = models.PositiveIntegerField(
+        null=True,
+        verbose_name="Цена, до",
+        blank=True
+    )
+    unit = models.CharField(
+        max_length=255,
+        default='',
+        choices=Unit.choices,
+        verbose_name="единица",
+        blank=True
+    )
+    includes = models.CharField(
+        verbose_name="В цену входит",
+        max_length=255,
+        blank=True
+    )
+    Service = models.ForeignKey(
+        "Services",
+        related_name="+",
+        on_delete=models.CASCADE
+    )
+    Company = models.ForeignKey(
+        "Company",
+        related_name="+",
+        on_delete=models.CASCADE
+    )
+    time_create = models.DateField(
+        verbose_name="Время создания",
+        auto_now_add=True
+    )
+    is_published = models.BooleanField(
+        verbose_name="Опубликовано",
+        default=True,
+    )
+
+    class Meta:
+        verbose_name = 'Прайс'
+        verbose_name_plural = 'Прайсы'
         ordering = ['id', 'name']
 
     def __str__(self):
@@ -296,7 +382,7 @@ class Timetable(models.Model):
     time_work = models.CharField(
         verbose_name='Время работы',
         max_length=128,
-    blank=True
+        blank=True
     )
 
     class Meta:
@@ -315,7 +401,8 @@ class CompanyPhoto(models.Model):
         blank=True
     )
     is_published = models.BooleanField(
-        default=True, verbose_name="Опубликовано"
+        verbose_name="Опубликовано",
+        default=True,
     )
     Company = models.ForeignKey(
         "Company",
@@ -324,8 +411,8 @@ class CompanyPhoto(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Фото компании'
-        verbose_name_plural = 'Фото компаний'
+        verbose_name = 'Фото клиники'
+        verbose_name_plural = 'Фото клиник'
         ordering = ['id']
 
 

@@ -1,0 +1,3 @@
+PassengerEnabled On
+PassengerPython /home/s/seoprovi/.local/bin/python3.10
+#PassengerPython /home/s/seoprovi/seoprovi.beget.tech/djangoenv/bin/python3.10

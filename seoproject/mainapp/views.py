@@ -36,6 +36,7 @@ class Index(ListView, DataMixin):
         company_all = Company.objects.all()
         count_company = len(company_all)  # кол-во клиник
         context['count_company'] = count_company
+
         c_def = self.get_user_context(title=context['company'])
 
         return dict(list(context.items()) + list(c_def.items()))  # объединение словарей для передачи контекста
@@ -156,9 +157,17 @@ def logout_user(request):
 
 class SearchView(ListView, DataMixin):
     paginate_by = 10
+    model = Company
     template_name = 'mainapp/search.html'  # указываем путь к шаблону
+    context_object_name = 'company'  # переменная контекста
 
-    def get(self, request, *args, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_context(title=context['company'])
+
+        return dict(list(context.items()) + list(c_def.items()))
+
+    def get(self, request, object_list=None, *args, **kwargs):
         context = {}
         q = request.GET.get('q')
         if q:
@@ -166,7 +175,6 @@ class SearchView(ListView, DataMixin):
 
             # Searching for all models
             query_sets.append(Company.objects.search(query=q))
-            # query_sets.append(Reviews.objects.search(query=q))
             # query_sets.append(Services.objects.search(query=q))
 
             # and combine results

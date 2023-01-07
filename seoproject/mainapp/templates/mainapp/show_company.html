@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block content %}
-<div class="content show">
+<div class="content show" xmlns="http://www.w3.org/1999/html">
     <article id="{{ company.slug }}"></article>  <!--Якорь-->
 
        <!-- поле фото клиник-->
@@ -28,8 +28,7 @@
           <a href="" class="mr-1 badge badge-info">#{{ tag }}</a>
         {% endfor %}
 <!--			название клиники -->
-<!--			полоска раздела-->
-        <hr>
+<!--раздел--><hr>
         <h3>{{ company.name }}</h3>
         <hr>
 <!-- 			Отображение звездочек рейтинга клиник -->
@@ -42,17 +41,45 @@
         {% endautoescape %}
 
 <!--    поле вывода телефона, адреса, цены, услуг-->
-
-        <p class="con_service">Цены: от 500 р.</p>
-
+        <a href="#price">
+        <button type="button" class="btn btn-primary">Цены на услуги</button>
+        </a>
         {% autoescape off %}
-        <p>{{ company.services | linebreaks}}</p>
+        <p>{{ company.services | linebreaks }}</p>
         {% endautoescape %}
     </div>
 
 </div>
-    <!--			полоска раздела-->
-           <hr>
+
+<!--Вывод цен на услуги клиники--><hr>
+    <article id="price"></article>
+
+    <div class="separator"><h4>Цены на услуги: "{{ company.name }}"</h4></div>
+<div class="pr_container">
+       {% for i in price %}
+            {% if company == i.Company %}
+                <div class="price">
+                    <span class="pr_service">{{ i.Service }},</span>
+                    {% if i.price_min %}
+                        <span class="pr_price">Цена: от {{ i.price_min }} р.</span>
+                    {% else %}
+                        <span class="pr_price">Бесплатно</span>
+                    {% endif %}
+                    {% if i.price_max %}
+                        <span class="pr_price">- до {{ i.price_max }} р.</span>
+                    {% endif %}
+                    {% if i.price_max %}
+                        <span class="pr_unit">({{ i.unit }}),</span>
+                    {% endif %}
+                    {% if i.includes %}
+                        <span class="pr_includes">, в услугу входит: </span>
+                        <span class="pr_includes_con">{{ i.includes }}</span>
+                    {% endif %}
+                </div>
+            {% endif %}
+        {% endfor %}
+<!--раздел--><hr>
+</div>
 <!--Вывод отзывов о компании-->
     <section>
     <div class="separator"><h4>Отзывы о клинике: "{{ company.name }}"</h4></div>
@@ -60,18 +87,20 @@
         <div class="company_review">
             {% for i in reviews %}
                 {% if i.Company.slug == company.slug %}
-                    <br>
+                        <br>
                     <div class="rat_star">
                         <!-- Отображение звездочек рейтинга клиник -->
                         {% include 'mainapp/review_stars.html' %}
                     </div>
-                    <br>
-            <div class="">
-                    <h6>{{ i.name }}</h6><span>{{ i.time_create }}</span>
-            </div>
+                        <br>
+                    <div class="">
+                        <h6>{{ i.name }}</h6><span>{{ i.time_create }}</span>
+                    </div>
                     <p>{{ i.description }}</p>
-                    <hr>
+                        <hr>
                 {% endif %}
+            {% empty %}
+                <p>Нет рейтинга клиник</p>
             {% endfor %}
         </div>
         {% include 'mainapp/paginator.html' %}
