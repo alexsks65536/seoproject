@@ -1,0 +1,29 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    {% block page %}
+    <h3>Поиск</h3>
+    <hr>
+    <br>
+        <form method="get">
+<!--        {{ filter.form.label_tag }}{{ filter.form.as_p }}-->
+        {% for f in filter.form %}
+        <p><label for="{{ f.id_for_label }}">{{ f.label_tag }} </label>{{ f }}</p>
+        <div>{{ f.errors }}</div>
+        {% endfor %}
+
+        <button type="submit">Поиск</button>
+
+        </form>
+        <ul>
+        {% for c in filter.qs %}
+            <li>{{ c.name }} | {{ c.rating }} | {{ c.time_create }}</li>
+        {% endfor %}
+        </ul>
+
+    {% include 'mainapp/paginator.html' %}
+    {% endblock %}
+</div>
+{% endblock %}

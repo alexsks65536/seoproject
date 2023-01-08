@@ -34,7 +34,7 @@ class AddReviewForm(forms.ModelForm):
 
 
 class FeedBackForm(forms.Form):
-
+    captcha = CaptchaField()
     name = forms.CharField(
         max_length=100,
         widget=forms.TextInput(attrs={
@@ -67,4 +67,26 @@ class FeedBackForm(forms.Form):
             'placeholder': "Ваше сообщение"
         })
     )
+
+
+# class SearchCompanyForm(forms.Form):
+#     name = forms.CharField(
+#         max_length=100,
+#         label='Название',
+#         widget=forms.TextInput(attrs={
+#             'class': 'form-control',
+#             'name': 'name',
+#             'label': 'label',
+#             'placeholder': 'Найти'
+#         })
+#     )
+
+class SearchCompanyForm(forms.ModelForm):
+    class Meta:
+        model = Company
+        fields = ['name']
+        # виджеты с классами для полей
+        widgets = {
+            'name': forms.TextInput(attrs={'class': 'form_settings input', 'label_tag': 'Найти', 'placeholder': 'Найти'}),
+        }
 

@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'mainapp.apps.MainappConfig',
     'captcha',
     'taggit',
-    'easy_thumbnails'
+    'easy_thumbnails',
+    'django_filters',
 ]
 
 MIDDLEWARE = [

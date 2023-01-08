@@ -13,7 +13,9 @@ from django.core.mail import send_mail, BadHeaderError
 from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.views.generic.list import MultipleObjectMixin
+from django_filters.views import FilterView
 
+from .filters import CompanyFilter
 from .forms import *
 from .models import *
 from .utils import DataMixin
@@ -22,7 +24,8 @@ from dotenv import load_dotenv
 load_dotenv()
 
 sitevars = SiteVars.objects.all()
-services = Services.objects.all()
+topbanner = TopBanner.objects.all()
+services = Services.objects.filter(is_published=True)
 
 
 class Index(ListView, DataMixin):
@@ -78,6 +81,7 @@ class AddReview(CreateView, ListView, DataMixin):  # Добавить отзыв
             'title': 'Отзыв о клинике',
             'sitevars': sitevars,
             'services': services,
+            'topbanner': topbanner,
         })
 
     def post(self, request, *args, **kwargs):
@@ -110,6 +114,7 @@ class FeedBackView(View):
             'title': 'Написать мне',
             'sitevars': sitevars,
             'services': services,
+            'topbanner': topbanner,
         })
 
     def post(self, request, *args, **kwargs):
@@ -135,6 +140,7 @@ class SuccessView(View):
             'title': 'Спасибо',
             'sitevars': sitevars,
             'services': services,
+            'topbanner': topbanner,
         })
 
 
@@ -194,3 +200,21 @@ class SearchView(ListView, DataMixin):
                 context['object_list'] = current_page.page(current_page.num_pages)
 
         return render(request=request, template_name=self.template_name, context=context)
+
+
+class SearchCompany(ListView, DataMixin):
+
+    def get(self, request, *args, **kwargs):
+        form = SearchCompanyForm()
+        label = 'Найти'
+        company_list = Company.objects.all().order_by('name')
+        company_filter = CompanyFilter(request.GET, queryset=company_list)
+        return render(request, 'mainapp/company_list.html',
+                      {'filter': company_filter,
+                       'form': form,
+                       'sitevars': sitevars,
+                       'topbanner': topbanner,
+                       'services': services,
+                       'label': label,
+                       }
+                      )
