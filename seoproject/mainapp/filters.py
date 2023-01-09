@@ -13,12 +13,23 @@ from .models import Company
 
 
 class CompanyFilter(django_filters.FilterSet):
+    name = django_filters.CharFilter(lookup_expr='iregex', label='Клиника')
+    rating = django_filters.NumberFilter(lookup_expr='gte', label='Рейтинг')
+    # tag = django_filters.CharFilter(lookup_expr='iregex', label='Тег')
+    #
+    #
+    # name = django_filters.CharFilter()
+    # rating__gt = django_filters.NumberFilter(field_name='rating', lookup_expr='gt')
+    # rating__lt = django_filters.NumberFilter(field_name='rating', lookup_expr='lt')
+    #
+    # class Meta:
+    #     model = Company
+    #     fields = ['name', 'rating']
 
-    class Meta:
-        model = Company
-
-        fields = {
-                    'name': ['iregex'],
-                    'rating': ['gte'],
-                    'time_create': ['iregex'],
-                  }
+    # class Meta:
+    #     model = Company
+    #     fields = {
+    #                 'name': ['iregex'],
+    #                 'rating': ['gte'],
+    #                 'time_create': ['iregex'],
+    #               }

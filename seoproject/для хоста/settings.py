@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'captcha',
     'taggit',
     'easy_thumbnails'
+    'django_filters',
 ]
 
 MIDDLEWARE = [

@@ -205,16 +205,14 @@ class SearchView(ListView, DataMixin):
 class SearchCompany(ListView, DataMixin):
 
     def get(self, request, *args, **kwargs):
-        form = SearchCompanyForm()
-        label = 'Найти'
         company_list = Company.objects.all().order_by('name')
+        review_list = Reviews.objects.all()
         company_filter = CompanyFilter(request.GET, queryset=company_list)
+        review_filter = CompanyFilter(request.GET, queryset=review_list)
         return render(request, 'mainapp/company_list.html',
                       {'filter': company_filter,
-                       'form': form,
                        'sitevars': sitevars,
                        'topbanner': topbanner,
                        'services': services,
-                       'label': label,
                        }
                       )
