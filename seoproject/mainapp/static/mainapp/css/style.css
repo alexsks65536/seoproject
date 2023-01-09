@@ -391,6 +391,63 @@ ol {
     margin: 10px;
 
 }
+/* Форма поиска */
+/*----------------------------------*/
+* {box-sizing: border-box;}
+.search form {
+  width: auto;
+  float: right;
+  margin-right: 30px;
+}
+.search input {
+  width: 250px;
+  height: 42px;
+  padding-left: 15px;
+  border-radius: 42px;
+  border: 2px solid #007bff;
+  background: #F9F0DA;
+  outline: none;
+  position: relative;
+  transition: .3s linear;
+}
+.search input:focus {
+  width: 300px;
+}
+.search button {
+  width: 42px;
+  height: 42px;
+  background: none;
+  border: none;
+  position: absolute;
+  top: -2px;
+  right: 0;
+}
+.search button:before{
+  content: "\f002";
+  font-family: FontAwesome;
+  color: #007bff;
+}
+/*-----поиск на company_list.html---------------------*/
+.search-list form {
+  width: auto;
+  float: right;
+  margin-right: 30px;
+}
+.search-list input {
+  width: 250px;
+  height: 42px;
+  padding-left: 15px;
+  border-radius: 42px;
+  border: 2px solid #007bff;
+  background: #F9F0DA;
+  outline: none;
+  position: relative;
+  transition: .3s linear;
+}
+.search-list input:focus {
+  width: 300px;
+}
+
 /* Модальное изображение */
 /* Стиль изображения, используемого для запуска модального */
 #myImg {

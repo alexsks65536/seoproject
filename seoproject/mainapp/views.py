@@ -26,7 +26,7 @@ load_dotenv()
 sitevars = SiteVars.objects.all()
 topbanner = TopBanner.objects.all()
 services = Services.objects.filter(is_published=True)
-
+reviews = Reviews.objects.filter(is_published=True)
 
 class Index(ListView, DataMixin):
     paginate_by = 10
@@ -161,54 +161,10 @@ def logout_user(request):
     return redirect('login')
 
 
-class SearchView(ListView, DataMixin):
-    paginate_by = 10
-    model = Company
-    template_name = 'mainapp/search.html'  # указываем путь к шаблону
-    context_object_name = 'company'  # переменная контекста
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        context = super().get_context_data(**kwargs)
-        c_def = self.get_user_context(title=context['company'])
-
-        return dict(list(context.items()) + list(c_def.items()))
-
-    def get(self, request, object_list=None, *args, **kwargs):
-        context = {}
-        q = request.GET.get('q')
-        if q:
-            query_sets = []  # Total QuerySet
-
-            # Searching for all models
-            query_sets.append(Company.objects.search(query=q))
-            # query_sets.append(Services.objects.search(query=q))
-
-            # and combine results
-            final_set = list(chain(*query_sets))
-            final_set.sort(key=lambda x: x.time_create, reverse=True)  # Sorting
-
-            context['last_question'] = '?q=%s' % q
-
-            current_page = Paginator(final_set, 10)
-
-            page = request.GET.get('page')
-            try:
-                context['object_list'] = current_page.page(page)
-            except PageNotAnInteger:
-                context['object_list'] = current_page.page(1)
-            except EmptyPage:
-                context['object_list'] = current_page.page(current_page.num_pages)
-
-        return render(request=request, template_name=self.template_name, context=context)
-
-
 class SearchCompany(ListView, DataMixin):
-
     def get(self, request, *args, **kwargs):
         company_list = Company.objects.all().order_by('name')
-        review_list = Reviews.objects.all()
         company_filter = CompanyFilter(request.GET, queryset=company_list)
-        review_filter = CompanyFilter(request.GET, queryset=review_list)
         return render(request, 'mainapp/company_list.html',
                       {'filter': company_filter,
                        'sitevars': sitevars,
