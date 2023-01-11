@@ -391,6 +391,10 @@ ol {
     margin: 10px;
 
 }
+.show_map {
+    width: 80%;
+    margin: 0 auto;
+}
 /* Форма поиска */
 /*----------------------------------*/
 * {box-sizing: border-box;}

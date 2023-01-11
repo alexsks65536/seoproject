@@ -7,30 +7,6 @@ from taggit.managers import TaggableManager
 STARS = zip(range(1, 6), range(1, 6))
 
 
-class CompanyManager(models.Manager):
-    use_for_related_fields = True
-
-    def search(self, query=None):
-        qs = self.get_queryset()
-        if query:
-            or_lookup = (Q(name__iregex=query))
-            qs = qs.filter(or_lookup)
-
-        return qs
-
-
-class ServiceManager(models.Manager):
-    use_for_related_fields = True
-
-    def search(self, query=None):
-        qs = self.get_queryset()
-        if query:
-            or_lookup = (Q(name__iregex=query))
-            qs = qs.filter(or_lookup)
-
-        return qs
-
-
 class Company(models.Model):
     """
     Описание клиник
@@ -94,8 +70,6 @@ class Company(models.Model):
     def profit(self):
         company_profit = self.stars * self.rating
         return company_profit
-
-    objects = CompanyManager()
 
 
 class Reviews(models.Model):
@@ -189,8 +163,6 @@ class Services(models.Model):
 
     def __str__(self):
         return self.name
-
-    objects = ServiceManager()
 
 
 class Price(models.Model):
@@ -414,6 +386,4 @@ class CompanyPhoto(models.Model):
         verbose_name = 'Фото клиники'
         verbose_name_plural = 'Фото клиник'
         ordering = ['id']
-
-
 

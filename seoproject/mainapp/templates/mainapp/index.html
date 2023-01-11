@@ -50,6 +50,7 @@
 				<a href="{{ clinic.get_absolute_url }}">читать далее</a>
 				</p>
 				{% endautoescape %}
+				<a href="#maps">посмотреть на карте</a>
             </div>
 
 <!--			поле вывода телефона, адреса, цены, услуг-->
@@ -74,6 +75,15 @@
 <!--	Конец основного контента-->
 <!--        ПАГИНАТОР-->
 		{% include 'mainapp/paginator.html' %}
+
+	</section>
+	<a name="maps"></a>
+	<section>
+		<div class="content">
+				<div class="show">
+		<script type="text/javascript" charset="utf-8" async src="https://api-maps.yandex.ru/services/constructor/1.0/js/?um=constructor%3Aaf0d8f9bf2c1f0037a4e518469b29da9c6880d910c8ff6f8cbd0214a566da5b9&amp;width=100%25&amp;height=411&amp;lang=ru_RU&amp;scroll=true&amp;apikey=bf84682f-d862-41ee-bf48-67ba817b4dd1" ></script>
+	</div>
+		</div>
 	</section>
 
 {% endblock content %}

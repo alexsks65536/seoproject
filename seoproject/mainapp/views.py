@@ -28,6 +28,7 @@ topbanner = TopBanner.objects.all()
 services = Services.objects.filter(is_published=True)
 reviews = Reviews.objects.filter(is_published=True)
 
+
 class Index(ListView, DataMixin):
     paginate_by = 10
     model = Company
