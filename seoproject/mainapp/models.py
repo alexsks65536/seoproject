@@ -114,7 +114,7 @@ class Reviews(models.Model):
     )
     is_published = models.BooleanField(
         verbose_name="Опубликовано",
-        default=True,
+        default=False,
     )
 
     def get_absolute_url(self):
@@ -387,3 +387,20 @@ class CompanyPhoto(models.Model):
         verbose_name_plural = 'Фото клиник'
         ordering = ['id']
 
+
+# class TotalCompany(models.Model):
+#     Company = models.ForeignKey(
+#         "Company",
+#         related_name="+",
+#         on_delete=models.CASCADE
+#     )
+#     Reviews = models.ForeignKey(
+#         "Reviews",
+#         related_name="+",
+#         on_delete=models.CASCADE
+#     )
+#     Price = models.ForeignKey(
+#         "Price",
+#         related_name="+",
+#         on_delete=models.CASCADE
+#     )
